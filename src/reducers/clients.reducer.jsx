@@ -2,12 +2,12 @@ function ClientReducer (state, action) {
     switch (action.type) {
         case 'loading':
             return {
-                clients: state.clients,
+                clients: state.clients, 
                 status: 'loading'    
             }
         case 'error':
             return {
-                clients: state.clients,
+                clients: state.clients, 
                 status: 'error'
             }
         case 'success':

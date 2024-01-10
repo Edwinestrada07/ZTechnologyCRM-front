@@ -15,7 +15,7 @@ function FormClient() {
 
     const submit = (event) => {
         event.preventDefault()
-        dispatch({type: 'loading'})
+        dispatch({ type: 'loading' })
 
         setTimeout(() => {
             fetch('http://localhost:4000/client', {
@@ -35,8 +35,9 @@ function FormClient() {
 
     }
 
-    if(state.status === 'loading')
+    if(state.status === 'loading') 
         return 'loading...'
+
     return (
         <form onSubmit={submit}>
             <label htmlFor="name">Nombre</label>
