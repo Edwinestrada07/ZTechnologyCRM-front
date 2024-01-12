@@ -3,6 +3,7 @@ import Users from "./layouts/users"
 import Home from "./pages/home"
 import Client from "./pages/client"
 import Login from "./pages/login"
+import Product from "./pages/product"
 
 const router = createBrowserRouter([ 
     {
@@ -14,8 +15,12 @@ const router = createBrowserRouter([
                 Component: Home
             },
             {
-                path:'/Client',
+                path: '/Client',
                 Component: Client
+            },
+            {
+                path: '/Product',
+                Component: Product
             }
         ]
     },

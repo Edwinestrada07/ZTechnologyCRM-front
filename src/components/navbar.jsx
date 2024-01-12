@@ -14,6 +14,8 @@ function Navbar() {
         <nav>
             <Link to='/'>Home</Link><br />
             <Link to='/Client'>Client</Link><br />
+            <Link to='/Product'>Product</Link><br />
+            
             <Link onClick={logout}>Cerrar Sesión</Link>
         </nav>
     )
