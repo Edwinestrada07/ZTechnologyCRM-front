@@ -31,7 +31,7 @@ function FormClient() {
                 dispatch({ type: 'createClient', client: response.client })
             })
 
-        }, 1000)
+        }, 500)
 
     }
 
