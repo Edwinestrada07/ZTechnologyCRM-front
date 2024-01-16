@@ -9,7 +9,7 @@ function Client() {
     const [state, dispatch] = useReducer(ClientReducer, { clients: [] } )
 
     return <>
-        <h2>Página de Usuarios</h2>
+        <h2>Página de Clientes</h2>
         <ClientContext.Provider value={{ state, dispatch }} > 
             <FormClient />
             <TableClients />

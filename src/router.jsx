@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom"
 import Users from "./layouts/users"
+
 import Home from "./pages/home"
 import Client from "./pages/client"
-import Login from "./pages/login"
+import User from "./pages/user"
 import Product from "./pages/product"
+import Login from "./pages/login"
 
 const router = createBrowserRouter([ 
     {
@@ -19,9 +21,13 @@ const router = createBrowserRouter([
                 Component: Client
             },
             {
+                path: '/User',
+                Component: User
+            },
+            {
                 path: '/Product',
                 Component: Product
-            }
+            },
         ]
     },
     {
