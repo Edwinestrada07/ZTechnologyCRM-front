@@ -59,6 +59,7 @@ function TableClients() {
             <tbody>
                 {state.clients.map((client, i) => (
                     <tr key={i}>
+                    <li key={client._id}>{client.name}</li>
                         <td>{client.name}</td>
                         <td>{client.email}</td>
                         <td>{client.address}</td>
