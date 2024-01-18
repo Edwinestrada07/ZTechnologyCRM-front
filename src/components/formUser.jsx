@@ -13,40 +13,45 @@ function FormUser() {
         })
     }
 
-    const submit = (event) => {
-        event.preventDefault()
-        dispatch ({ type: 'loading' })
+    const submit = async (event) => {
+        event.preventDefault();
+        dispatch({ type: 'loading' });
 
-        setTimeout(() => {
-            fetch('http://localhost:4000/user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                authorization: localStorage.getItem('token')
-            },
-            body: JSON.stringify(users)
-        })
-            .then(response => response.json())
-            .then(response => {
-                dispatch({ type: 'createUser', users: response.users })
-            })
-
-        }, 500)
-    }
+        try {
+            await new Promise(resolve => setTimeout(resolve, 500)); // Simula el tiempo de espera
+    
+            const response = await fetch('http://localhost:4000/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token')
+                },
+                body: JSON.stringify(users)
+            });
+    
+            const responseData = await response.json();
+            dispatch({ type: 'createUser', users: responseData.users });
+        } catch (error) {
+            // Manejo de errores, por ejemplo, dispatch de un error
+            console.error('Error submitting data:', error);
+            dispatch({ type: 'error', error: 'Error submitting data' });
+        }
+    };
+    
 
     if(state.status === 'loading')
         return 'loading'
 
-        return (
-            <form onSubmit={submit}>
-                <label htmlFor="email">Correo</label>
-                <input type="email" id="email" onChange={onChangeData} />
-                <label htmlFor="password">Contraseña</label>
-                <input type="password" id="password" onChange={onChangeData} />
+    return (
+        <form onSubmit={submit}>
+            <label htmlFor="email">Correo</label>
+            <input type="text" id="email" onChange={onChangeData} />
+            <label htmlFor="password">Contraseña</label>
+            <input type="password" id="password" onChange={onChangeData} />
 
-                <button type="submit">Guardar</button>
-            </form>
-        )
+            <button type="submit">Guardar</button>
+        </form>
+    )
 }
 
 export default FormUser

@@ -13,27 +13,31 @@ function FormClient() {
         })
     }
 
-    const submit = (event) => {
-        event.preventDefault()
-        dispatch({ type: 'loading' })
-
-        setTimeout(() => {
-            fetch('http://localhost:4000/client', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                authorization: localStorage.getItem('token')
-            },
-            body: JSON.stringify(client)
-        })
-            .then(response => response.json())
-            .then(response => {
-                dispatch({ type: 'createClient', client: response.client })
-            })
-
-        }, 500)
-
-    }
+    const submit = async (event) => {
+        event.preventDefault();
+        dispatch({ type: 'loading' });
+        
+        try {
+            await new Promise(resolve => setTimeout(resolve, 500)); // Simula el tiempo de espera
+    
+            const response = await fetch('http://localhost:4000/client', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token')
+                },
+                body: JSON.stringify(client)
+            });
+    
+            const responseData = await response.json();
+            dispatch({ type: 'createClient', client: responseData.client });
+        } catch (error) {
+            // Manejo de errores, por ejemplo, dispatch de un error
+            console.error('Error submitting data:', error);
+            dispatch({ type: 'error', error: 'Error submitting data' });
+        }
+    };
+    
 
     if(state.status === 'loading') 
         return 'loading...'

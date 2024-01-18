@@ -8,7 +8,7 @@ const UserList = () => {
 
     const getUsers = async() => {
         try {
-           const response = await fetch('http://localhost:4000/product', {
+           const response = await fetch('http://localhost:4000/user', {
                 method: 'GET',
                 headers: {
                     authorization: localStorage.getItem('token')
@@ -38,7 +38,7 @@ const UserList = () => {
     }, [])
 
   return (
-      
+    <> { users.length > 0 ?
     <table>
         <thead>
           <tr>
@@ -60,7 +60,8 @@ const UserList = () => {
         }
       </tbody>
     </table>
-    
+    : <h3>No hay Usuarios</h3>}
+    </>
   )
 }
 

@@ -1,75 +1,72 @@
-import { useContext, useEffect } from "react";
-import { ClientContext } from "../contexts/clients.context";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function TableClients() {
-    const { state, dispatch } = useContext(ClientContext);
+const TableClients = () => {
 
-    useEffect(() => {
-        dispatch({ type: 'loading' });
+  const [clients, setClients] = useState([]);
 
-        fetch('http://localhost:4000/client', {
-            method: 'GET',
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        }).then(response => response.json())
-        .then(response => {
-            dispatch({ type: 'success', data: response });
-        });
-    }, []);
+  const getClients = async() => {
+      try {
+          const response = await fetch('http://localhost:4000/client', { 
+              method: 'GET',
+              headers: {
+                  authorization: localStorage.getItem('token')
+              }
+          });
+          const clients = await response.json(); 
+          setClients(clients);
+          
+      } catch (error) {
+          console.log("error", error);
+      }
+  }
 
-    const deleteClient = async (id) => {
-        dispatch({ type: 'loading' });
+  const deleteClient = async (id) => {
+      await fetch(`http://localhost:4000/client/${id}`, {
+          method: 'DELETE',
+          headers: {
+              authorization: localStorage.getItem('token')
+          }
+      });
 
-        await fetch(`http://localhost:4000/client/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        });
+      getClients();
+  };
+  
+  useEffect(() => {
+     getClients();
+  }, []); 
 
-        const response = await fetch('http://localhost:4000/client', {
-            method: 'GET',
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        });
+  return (
+    <> { clients.length > 0 ?
+    <table>
+      <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Dirección</th>
+              <th>Celular</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
 
-        const responseData = await response.json();
-        dispatch({ type: 'success', data: responseData });
-    };
+      <tbody>
+          { 
+           clients.map((client, i) => (
+              <tr key={i}>
+                  <td>{client.name}</td>
+                  <td>{client.email}</td>
+                  <td>{client.address}</td>
+                  <td>{client.phone}</td>
+                  <td><Link onClick={() => deleteClient(client.id)}>Eliminar</Link></td>
+              </tr>
+          ))
+        }
+      </tbody>
+    </table>
+    : <h3>No hay Clientes</h3>}
+    </>
+  );
+};
 
-    if (state === 'loading') {
-        return 'loading...';
-    }
-
-    return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Dirección</th>
-                    <th>Celular</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {state.clients.map((client, i) => (
-                    <tr key={i}>
-                    <li key={client._id}>{client.name}</li>
-                        <td>{client.name}</td>
-                        <td>{client.email}</td>
-                        <td>{client.address}</td>
-                        <td>{client.phone}</td>
-                        <td><Link onClick={() => deleteClient(client.id)}>Eliminar</Link></td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-    );
-}
-
-export default TableClients;
+export default TableClients

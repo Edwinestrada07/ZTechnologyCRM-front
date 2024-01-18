@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import api from '../api';
 
 const ProductList = () => {
 
@@ -35,17 +34,7 @@ const ProductList = () => {
   };
   
   useEffect(() => {
-    const fetchProducts = async() => {
-        try {
-            const response = await api.get('/products')
-            setProducts(response.data)
-        } catch (error) {
-            console.log("Error al obtener productos", error)
-        }
-    }
-
-    fetchProducts()
-    getProducts();
+     getProducts();
   }, []); 
 
   return (
@@ -65,7 +54,6 @@ const ProductList = () => {
           { 
            products.map((product, i) => (
               <tr key={i}>
-                <li key={product._id}>{product.title}</li>
                   <td>{product.title}</td>
                   <td>$ {product.price}</td>
                   <td>{product.stock}</td>
@@ -76,7 +64,7 @@ const ProductList = () => {
         }
       </tbody>
     </table>
-    : <h3>No hay productos</h3>}
+    : <h3>No hay Productos</h3>}
     </>
   );
 };
