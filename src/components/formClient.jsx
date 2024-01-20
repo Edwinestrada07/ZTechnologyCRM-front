@@ -43,7 +43,7 @@ function FormClient() {
         return 'loading...'
 
     return (
-        <form onSubmit={submit}>
+        <form class="btn btn-primary " onSubmit={submit}>
             <label htmlFor="name">Nombre</label>
             <input type="text" id="name" onChange={onChangeData} />
             <label htmlFor="email">Correo</label>
@@ -53,7 +53,7 @@ function FormClient() {
             <label htmlFor="phone">Celular</label>
             <input type="number" id="phone" onChange={onChangeData} />
 
-            <button type="submit">Guardar</button>
+            <button class="btn btn-primary" type="submit">Guardar</button>
         </form>
     )
 }

@@ -43,7 +43,7 @@ function FormProduct() {
         return 'loading...'
 
     return (
-        <form onSubmit={submit}>
+        <form class="btn btn-primary " onSubmit={submit}>
             <label htmlFor="title">Nombre</label>
             <input type="text" id='title' onChange={onChangeData} />
             <label htmlFor="price">Precio</label>
@@ -53,7 +53,7 @@ function FormProduct() {
             <label htmlFor="description">Descripción</label>
             <input type="text" id='description' onChange={onChangeData} />
 
-            <button type="submit">Guardar</button>
+            <button class="btn btn-primary " type="submit">Guardar</button>
         </form>
     )
 }

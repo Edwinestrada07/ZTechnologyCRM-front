@@ -43,7 +43,7 @@ function FormUser() {
         return 'loading'
 
     return (
-        <form onSubmit={submit}>
+        <form class="btn btn-primary " onSubmit={submit}>
             <label htmlFor="name">Nombre</label>
             <input type="name" id="name" onChange={onChangeData} />
             <label htmlFor="email">Correo</label>
@@ -56,7 +56,7 @@ function FormUser() {
                 <option value="ADMIN">Administrador</option>
               </select>
 
-            <button type="submit">Guardar</button>
+            <button class="btn btn-primary " type="submit">Guardar</button>
         </form>
     )
 }
