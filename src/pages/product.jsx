@@ -6,12 +6,12 @@ import { ProductContext } from '../contexts/products.context';
 
 const ProductsPage = () => {
 
-  const [state, dispatch] = useReducer(ProductReducer, { products: []})
+    const [state, dispatch] = useReducer(ProductReducer, { products: []})
 
-  return (
-    <div>
-      <h2>Página de Productos</h2>
-      <ProductContext.Provider value={{ state, dispatch }} > 
+    return (
+      <div>
+        <h2 className='text-center'>Página de Productos</h2>
+        <ProductContext.Provider value={{ state, dispatch }} > 
           <FormProduct />
           <ProductList />
       </ProductContext.Provider>

@@ -11,7 +11,7 @@ const UserPage = () => {
 
   return <>
     <div>
-      <h2>Página de Usuarios</h2>
+      <h2 className='text-center'>Página de Usuarios</h2>
       <UserContext.Provider value={{ state, dispatch }} >
           <FormUser />
           <UserList />

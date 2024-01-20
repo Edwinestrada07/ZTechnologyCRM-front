@@ -5,7 +5,7 @@ function FormUser() {
     const [users, setUsers] = useState({})
 
     const { state, dispatch } = useContext(UserContext)
-
+    
     const onChangeData = (event) => {
         setUsers({
             ...users,
@@ -44,10 +44,17 @@ function FormUser() {
 
     return (
         <form onSubmit={submit}>
+            <label htmlFor="name">Nombre</label>
+            <input type="name" id="name" onChange={onChangeData} />
             <label htmlFor="email">Correo</label>
             <input type="text" id="email" onChange={onChangeData} />
             <label htmlFor="password">Contraseña</label>
             <input type="password" id="password" onChange={onChangeData} />
+            <label htmlFor="role">Rol</label>
+              <select id="role" onChange={onChangeData} value={setUsers.role}>
+                <option value="USER">Gestor</option>
+                <option value="ADMIN">Administrador</option>
+              </select>
 
             <button type="submit">Guardar</button>
         </form>

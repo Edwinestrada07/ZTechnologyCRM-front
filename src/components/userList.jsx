@@ -8,14 +8,14 @@ const UserList = () => {
 
     const getUsers = async() => {
         try {
-           const response = await fetch('http://localhost:4000/user', {
+            const response = await fetch('http://localhost:4000/user', {
                 method: 'GET',
                 headers: {
                     authorization: localStorage.getItem('token')
                 }
-           })
-           const users = await response.json()
-           setUsers(users)
+            })
+            const users = await response.json()
+            setUsers(users)
 
         } catch (error) {
             console.log("error", error)
@@ -37,32 +37,36 @@ const UserList = () => {
         getUsers()
     }, [])
 
-  return (
+    return (
     <> { users.length > 0 ?
-    <table>
+    <table className="table table-striped table-hover table-light">
         <thead>
-          <tr>
-              <th>Correo</th>
-              <th>Constraseña</th>
-              <th>Actions</th>
-          </tr>
+            <tr>
+                <th >Nombre</th>
+                <th>Correo</th>
+                <th>Constraseña</th>
+                <th>Rol</th>
+                <th>Actions</th>
+            </tr>
         </thead>
 
-      <tbody>
-          { 
-           users.map((user, i) => (
-              <tr key={i}>
-                  <td>{user.email}</td>
-                  <td>{user.password}</td>
-                  <td><Link onClick={() => deleteUser(user.id)}>Eliminar</Link></td>
-              </tr>
-          ))
+        <tbody>
+            { 
+            users.map((user, i) => (
+                <tr key={i}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.password}</td>
+                    <td>{user.role}</td>
+                    <td><Link onClick={() => deleteUser(user.id)}>Eliminar</Link></td>
+                </tr>
+            ))
         }
-      </tbody>
+        </tbody>
     </table>
     : <h3>No hay Usuarios</h3>}
     </>
-  )
+    )
 }
 
 export default UserList
