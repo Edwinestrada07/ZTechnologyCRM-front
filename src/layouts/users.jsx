@@ -9,7 +9,7 @@ function Users() {
         if(!localStorage.getItem('token')) {
             navigate('/login')
         }
-    }, [])
+    }, [navigate])  
 
     return (
         <>  
