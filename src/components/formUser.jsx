@@ -43,9 +43,17 @@ function FormUser() {
         return 'loading'
 
     return (
-        <form class="btn btn-primary " onSubmit={submit}>
-            <label htmlFor="name">Nombre</label>
-            <input type="name" id="name" onChange={onChangeData} />
+        <form className="d-flex" onSubmit={submit}>
+            <div className="form-group m-2">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Nombre"
+                    name="name"
+                    id="name"
+                    onChange={ onChangeData }
+                />
+            </div>
             <label htmlFor="email">Correo</label>
             <input type="text" id="email" onChange={onChangeData} />
             <label htmlFor="password">Contraseña</label>
@@ -56,7 +64,7 @@ function FormUser() {
                 <option value="ADMIN">Administrador</option>
               </select>
 
-            <button class="btn btn-primary " type="submit">Guardar</button>
+            <button className="btn btn-primary " type="submit">Guardar</button>
         </form>
     )
 }
