@@ -10,7 +10,7 @@ const ProductsPage = () => {
 
     return (
       <div>
-        <h2 className='text-center'>Página de Productos</h2>
+        <h2 className="text-center">Página de Productos</h2>
         <ProductContext.Provider value={{ state, dispatch }} > 
           <FormProduct />
           <ProductList />

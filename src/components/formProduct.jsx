@@ -43,17 +43,56 @@ function FormProduct() {
         return 'loading...'
 
     return (
-        <form class="btn btn-primary " onSubmit={submit}>
-            <label htmlFor="title">Nombre</label>
-            <input type="text" id='title' onChange={onChangeData} />
-            <label htmlFor="price">Precio</label>
-            <input type="number" id='price' onChange={onChangeData} />
-            <label htmlFor="stock">Cantidad</label>
-            <input type="number" id='stock' onChange={onChangeData} />
-            <label htmlFor="description">Descripción</label>
-            <input type="text" id='description' onChange={onChangeData} />
-
-            <button class="btn btn-primary " type="submit">Guardar</button>
+        <form className="d-flex" onSubmit={submit}>
+            <div className="form-group m-2">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Nombre"
+                    name="title"
+                    id="title"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <input
+                    type="number"
+                    className="form-control"
+                    placeholder="Precio"
+                    name="price"
+                    id="price"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <input
+                    type="number"
+                    className="form-control"
+                    placeholder="Cantidad"
+                    name="stock"
+                    id="stock"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Descripción"
+                    name="description"
+                    id="description"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <button 
+                    className="btn btn-primary" 
+                    type="submit"
+                  >
+                    Guardar
+                </button>
+            </div>
+           
         </form>
     )
 }

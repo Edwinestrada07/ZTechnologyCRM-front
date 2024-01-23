@@ -43,17 +43,56 @@ function FormClient() {
         return 'loading...'
 
     return (
-        <form class="btn btn-primary " onSubmit={submit}>
-            <label htmlFor="name">Nombre</label>
-            <input type="text" id="name" onChange={onChangeData} />
-            <label htmlFor="email">Correo</label>
-            <input type="email" id="email" onChange={onChangeData} />
-            <label htmlFor="address">Dirección</label>
-            <input type="text" id="address" onChange={onChangeData} />
-            <label htmlFor="phone">Celular</label>
-            <input type="number" id="phone" onChange={onChangeData} />
+        <form className="d-flex" onSubmit={submit}>
+            <div className="form-group m-2">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Nombre"
+                    name="name"
+                    id="name"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Correo"
+                    name="email"
+                    id="email"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Dirección"
+                    name="address"
+                    id="address"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <input
+                    type="number"
+                    className="form-control"
+                    placeholder="Celular/Teléfono"
+                    name="phone"
+                    id="phone"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <button 
+                    className="btn btn-primary" 
+                    type="submit"
+                  >
+                    Guardar
+                </button>
+            </div>
 
-            <button class="btn btn-primary" type="submit">Guardar</button>
         </form>
     )
 }

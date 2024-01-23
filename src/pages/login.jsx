@@ -13,7 +13,7 @@ function Login() {
         if(localStorage.getItem('token')) {
             navigate ('/')
         }
-    }, [])
+    }, [navigate])
 
     const onChangeData = (event) => {
         setLogin({
@@ -44,13 +44,36 @@ function Login() {
     }
     
     return (
-        <form onSubmit={submit} id='form-login'>
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" onChange={onChangeData} />
-            <label htmlFor="password">Contraseña:</label>
-            <input type="password" id="password" onChange={onChangeData} />
-
-            <button type="submit">Iniciar Sesión</button> 
+        <form className="d-flex" onSubmit={submit} id='form-login'>
+            <div className="form-group m-2">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Correo"
+                    name="email"
+                    id="email"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Contraseña"
+                    name="password"
+                    id="password"
+                    onChange={ onChangeData }
+                />
+            </div>
+            <div className="form-group m-2">
+                <button 
+                    className="btn btn-primary" 
+                    type="submit"
+                  >
+                    Iniciar Sesión
+                </button>
+            </div>
+             
         </form>
     )
 }

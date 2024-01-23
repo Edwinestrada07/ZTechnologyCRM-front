@@ -1,41 +1,7 @@
-import { useEffect, useState } from "react"
 import React from 'react';
 import { Link } from "react-router-dom"
 
-const UserList = () => {
-
-    const [users, setUsers] = useState([])
-
-    const getUsers = async() => {
-        try {
-            const response = await fetch('http://localhost:4000/user', {
-                method: 'GET',
-                headers: {
-                    authorization: localStorage.getItem('token')
-                }
-            })
-            const users = await response.json()
-            setUsers(users)
-
-        } catch (error) {
-            console.log("error", error)
-        }
-    }
-
-    const deleteUser = async (id) => {
-        await fetch(`http://localhost:4000/user/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        })
-
-        getUsers()
-    }
-
-    useEffect( () => {
-        getUsers()
-    }, [])
+const UserList = ({ users, deleteUser, updateUser }) => {
 
     return (
     <> { users.length > 0 ?
@@ -58,7 +24,10 @@ const UserList = () => {
                     <td>{user.email}</td>
                     <td>{user.password}</td>
                     <td>{user.role}</td>
-                    <td><Link onClick={() => deleteUser(user.id)}>Eliminar</Link></td>
+                    <td>
+                        <Link onClick={() => deleteUser(user.id)}>Eliminar</Link>
+                        <Link onClick={() => updateUser(user.id)}>Actualizar</Link>
+                    </td>
                 </tr>
             ))
         }
