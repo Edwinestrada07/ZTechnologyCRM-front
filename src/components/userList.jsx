@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 import { Link } from "react-router-dom"
 
-const UserList = ({ users, deleteUser, updateUser }) => {
+const UserList = ({ users, deleteUser, getUser }) => {
 
     return (
     <> { users.length > 0 ?
     <table className="table table-striped table-hover table-light">
         <thead>
             <tr>
-                <th >Nombre</th>
+                <th>Nombre</th>
                 <th>Correo</th>
                 <th>Constraseña</th>
                 <th>Rol</th>
@@ -25,8 +25,8 @@ const UserList = ({ users, deleteUser, updateUser }) => {
                     <td>{user.password}</td>
                     <td>{user.role}</td>
                     <td>
-                        <Link onClick={() => deleteUser(user.id)}>Eliminar</Link>
-                        <Link onClick={() => updateUser(user.id)}>Actualizar</Link>
+                        <Link onClick={() => deleteUser(user.id)}>Eliminar</Link><br />
+                        <Link onClick={() => getUser(user.id)}>Actualizar</Link>
                     </td>
                 </tr>
             ))

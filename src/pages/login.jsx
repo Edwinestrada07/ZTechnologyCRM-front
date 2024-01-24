@@ -44,7 +44,7 @@ function Login() {
     }
     
     return (
-        <form className="d-flex" onSubmit={submit} id='form-login'>
+        <form className="d-flex mt-4" onSubmit={submit} id='form-login'>
             <div className="form-group m-2">
                 <input
                     type="text"

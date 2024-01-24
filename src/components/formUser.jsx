@@ -1,38 +1,9 @@
-import {  useState } from "react";
-
-function FormUser({ user }) {
-    const [users, setUsers] = useState({})
+function FormUser(props) {
     
-    const onChangeData = (event) => {
-        setUsers({
-            ...users,
-            [event.target.id]: event.target.value
-        })
-    }
-
     const submit = async (event) => {
         event.preventDefault();
-        dispatch({ type: 'loading' });
 
-        try {
-            await new Promise(resolve => setTimeout(resolve, 500)); // Simula el tiempo de espera
-    
-            const response = await fetch('http://localhost:4000/user', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: localStorage.getItem('token')
-                },
-                body: JSON.stringify(users)
-            });
-    
-            const responseData = await response.json();
-            dispatch({ type: 'createUser', users: responseData.users });
-        } catch (error) {
-            // Manejo de errores, por ejemplo, dispatch de un error
-            console.error('Error submitting data:', error);
-            dispatch({ type: 'error', error: 'Error submitting data' });
-        }
+    props.onSubmit()
     };
     
     return (
@@ -44,7 +15,8 @@ function FormUser({ user }) {
                     placeholder="Nombre"
                     name="name"
                     id="name"
-                    onChange={ onChangeData }
+                    value={ props.user.name ||  ''}
+                    onChange={ props.onChangeData }
                 />
             </div>
             <div className="form-group m-2">
@@ -54,7 +26,8 @@ function FormUser({ user }) {
                     placeholder="Correo"
                     name="email"
                     id="email"
-                    onChange={ onChangeData }
+                    value={ props.user.email ||  ''}
+                    onChange={ props.onChangeData }
                 />
             </div>
             <div className="form-group m-2">
@@ -64,11 +37,12 @@ function FormUser({ user }) {
                     placeholder="Contraseña"
                     name="password"
                     id="password"
-                    onChange={ onChangeData }
+                    value={ props.user.password ||  ''}
+                    onChange={ props.onChangeData }
                 />
             </div>
             <div className="form-group m-2">
-                <select id="role" onChange={onChangeData} value={setUsers.role}>
+                <select id="role" onChange={props.onChangeData} value={props.user.role}>
                     <option value="USER">Gestor</option>
                     <option value="ADMIN">Administrador</option>
                 </select>

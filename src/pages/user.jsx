@@ -1,70 +1,125 @@
-import UserList from "../components/userList";
-import FormUser from "../components/formUser";
-import { useEffect, useState } from "react";
+import UserList from "../components/userList"
+import FormUser from "../components/formUser"
+import { useEffect, useState } from "react"
 
 const UserPage = () => {
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState({});
+  const [users, setUsers] = useState([])
+  const [user, setUser] = useState({})
+  const [isEditUser, setIsEditUser] = useState(false)
 
   const getUsers = async () => {
     try {
       const response = await fetch("http://localhost:4000/user", {
         method: "GET",
         headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      });
-      const users = await response.json();
-      setUsers(users);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+          authorization: localStorage.getItem("token")
+        }
+      })
 
-  const getUser = async () => {
+      const users = await response.json()
+      setUsers(users)
+
+    } catch (error) {
+      console.error("error", error)
+    }
+  }
+
+  const getUser = async (id) => {
     try {
       const response = await fetch(`http://localhost:4000/user/${id}`, {
         method: "GET",
         headers: {
-          authorization: localStorage.getItem("token"),
+          authorization: localStorage.getItem("token")
         }
-      });
-      const user = await response.json();
-      setUser(user);
+      })
+
+      const user = await response.json()
+      setUser(user)
+      setIsEditUser(true)
+
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error)
     }
-  };
+  }
+
+  const createUser = async (user) => {
+    try {
+      const response = await fetch('http://localhost:4000/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify(user)
+    })
+        const responseData = await response.json()
+
+        getUsers()
+      
+    } catch (error) {
+        console.error('Error al crear Usuario', error)
+    }
+  }
+
+  const updateUser = async (user) => {
+    try {
+      const response = await fetch(`http://localhost:4000/user/${user.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify(user)
+    })
+        const responseData = await response.json()
+
+        getUsers()
+        
+    } catch (error) {
+        console.error('Error al actualizar Usuario', error)
+    }
+  }
 
   const deleteUser = async (id) => {
     await fetch(`http://localhost:4000/user/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: localStorage.getItem("token"),
-      },
-    });
+        method: "DELETE",
+        headers: {
+            authorization: localStorage.getItem("token")
+        }
+    })
 
     getUsers()
-  };
+  }
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    getUsers()
+  }, [])
 
-  const onEditItem = (id) => {
-    getUser('id');
-  };
-    
+  const onChangeData = (event) => {
+    setUser({
+        ...user,
+        [event.target.id]: event.target.value
+    })
+  }
+
+  const onSubmit = () => {
+    if(isEditUser){
+        updateUser(user)
+    } else {
+        createUser(user)
+    }
+  }
+   
   return (
     <>
       <div>
         <h2 className="text-center">Página de Usuarios</h2>
 
-        <FormUser user={user} />
-        <UserList users={users} deleteUser={deleteUser} updateUser={onEditItem} />
+        <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} />
+        <UserList users={users} getUser={getUser} deleteUser={deleteUser} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default UserPage;
+export default UserPage
