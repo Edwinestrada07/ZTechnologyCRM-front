@@ -1,6 +1,6 @@
 function FormUser(props) {
     
-    const submit = async (event) => {
+    const submit = async (event) => { 
         event.preventDefault();
 
     props.onSubmit()

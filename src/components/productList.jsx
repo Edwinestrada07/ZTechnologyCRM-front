@@ -1,41 +1,7 @@
-import { useState, useEffect } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 
-const ProductList = () => {
-
-    const [products, setProducts] = useState([]);
-
-    const getProducts = async() => {
-        try {
-            const response = await fetch('http://localhost:4000/product', { 
-                method: 'GET',
-                headers: {
-                    authorization: localStorage.getItem('token')
-                }
-            });
-            const products = await response.json(); 
-                setProducts(products);
-            
-        } catch (error) {
-            console.log("error", error);
-        }
-    }
-
-    const deleteProduct = async (id) => {
-        await fetch(`http://localhost:4000/product/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        });
-
-        getProducts();
-    };
-    
-    useEffect(() => {
-        getProducts();
-    }, []); 
+const ProductList = ({ products, deleteProduct, getProduct}) => {
 
     return (
     <> { products.length > 0 ?
@@ -58,7 +24,10 @@ const ProductList = () => {
                     <td>$ {product.price}</td>
                     <td>{product.stock}</td>
                     <td>{product.description}</td>
-                    <td><Link onClick={() => deleteProduct(product.id)}>Eliminar</Link></td>
+                    <td>
+                        <Link onClick={() => deleteProduct(product.id)}>Eliminar</Link><br />
+                        <Link onClick={() => getProduct(product.id)}>Actualizar</Link>
+                    </td>
                 </tr>
             ))
         }

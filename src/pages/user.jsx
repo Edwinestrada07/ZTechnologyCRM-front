@@ -53,6 +53,7 @@ const UserPage = () => {
         body: JSON.stringify(user)
     })
         const responseData = await response.json()
+        console.log('Usuario creado:', responseData)
 
         getUsers()
       
@@ -72,6 +73,7 @@ const UserPage = () => {
         body: JSON.stringify(user)
     })
         const responseData = await response.json()
+        console.log('Usuario actualizado:', responseData)
 
         getUsers()
         
