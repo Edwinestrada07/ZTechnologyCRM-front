@@ -53,8 +53,10 @@ const UserPage = () => {
         body: JSON.stringify(user)
     })
         const responseData = await response.json()
+        console.log('Usuario creado:', responseData)
 
         getUsers()
+        setUser({})
       
     } catch (error) {
         console.error('Error al crear Usuario', error)
@@ -72,6 +74,7 @@ const UserPage = () => {
         body: JSON.stringify(user)
     })
         const responseData = await response.json()
+        console.log('Usuario actualizado:', responseData)
 
         getUsers()
         
@@ -109,13 +112,18 @@ const UserPage = () => {
         createUser(user)
     }
   }
+
+  const onClear = () => {
+    setUser({})
+    setIsEditUser(true)
+  }
    
   return (
     <>
       <div>
         <h2 className="text-center">Página de Usuarios</h2>
 
-        <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} />
+        <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} />
         <UserList users={users} getUser={getUser} deleteUser={deleteUser} />
       </div>
     </>
