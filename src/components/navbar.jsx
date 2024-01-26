@@ -59,6 +59,14 @@ function Navbar() {
                     >
                       Clients
                     </NavLink>
+
+                    <NavLink 
+                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
+                        to="/cart"
+                        
+                    >
+                      Cart
+                    </NavLink>
                 </div>
             </div>
 
