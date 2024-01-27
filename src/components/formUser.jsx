@@ -29,6 +29,7 @@ function FormUser(props) {
                         id="email"
                         value={ props.user.email ||  ''}
                         onChange={ props.onChangeData }
+                        disabled={ !props.isCreating}
                     />
                 </div>
                 <div className="form-group m-2">

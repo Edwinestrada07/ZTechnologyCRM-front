@@ -37,8 +37,10 @@ function Login() {
 
         const dataResponse = await response.json() //await porque nos devuelve una promesa
 
+        localStorage.setItem('email', dataResponse.email)
+        localStorage.setItem('password', dataResponse.password)
+        localStorage.setItem('role', dataResponse.role)
         localStorage.setItem('token', dataResponse.token)
-        localStorage.setItem('rol', dataResponse.rol)
 
         navigate('/')
     }
