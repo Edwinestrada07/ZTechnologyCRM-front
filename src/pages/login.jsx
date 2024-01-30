@@ -26,23 +26,33 @@ function Login() {
         event.preventDefault()
         //console.log(login) //Para ver la información del form en la consola
 
-        //Con el fetch conectamos nuestro login al back
-        const response = await fetch('http://localhost:4000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(login) //Va la Data como un String
-        })
+        try {
+            //Con el fetch conectamos nuestro login al back
+            const response = await fetch('http://localhost:4000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(login) //Va la Data como un String
+            })
 
-        const dataResponse = await response.json() //await porque nos devuelve una promesa
+            if (!response.ok) {
+                throw new Error("Error al iniciar sesión");
+            }
 
-        localStorage.setItem('email', dataResponse.email)
-        localStorage.setItem('password', dataResponse.password)
-        localStorage.setItem('role', dataResponse.role)
-        localStorage.setItem('token', dataResponse.token)
+            const dataResponse = await response.json() //await porque nos devuelve una promesa
 
-        navigate('/')
+            //localStorage.setItem('id', dataResponse.id)
+            localStorage.setItem('email', dataResponse.email)
+            localStorage.setItem('role', dataResponse.role)
+            localStorage.setItem('token', dataResponse.token)
+
+            navigate('/')
+            
+        } catch (error) {
+            console.error("error", error)
+        }
+        
     }
     
     return (
