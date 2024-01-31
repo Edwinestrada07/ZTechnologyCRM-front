@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
-import Users from "./layouts/users"
+import MainLayout from "./layouts/mainLayout"
 
 import Home from "./pages/home"
 import Client from "./pages/client"
@@ -11,7 +11,7 @@ import Cart from "./pages/cart"
 const router = createBrowserRouter([ 
     {
         path: '/',
-        Component: Users,
+        Component: MainLayout,
         children: [
             {
                 path: '/',
