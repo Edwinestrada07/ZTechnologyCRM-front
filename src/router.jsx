@@ -7,6 +7,7 @@ import User from "./pages/user"
 import Product from "./pages/product"
 import Login from "./pages/login"
 import Cart from "./pages/cart"
+import Signup from "./pages/signup"
 
 const router = createBrowserRouter([ 
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
     {
         path: '/login',
         Component: Login
+    },
+    {
+        path: '/signup',
+        Component: Signup
     }
 ])
 

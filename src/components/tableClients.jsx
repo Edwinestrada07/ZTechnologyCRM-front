@@ -39,7 +39,7 @@ const TableClients = () => {
 
     return (
     <> { clients.length > 0 ?
-    <table className="table table-striped table-hover table-light">
+    <table className="table table-striped table-hover table-light table-dark">
         <thead>
             <tr>
                 <th>Nombre</th>

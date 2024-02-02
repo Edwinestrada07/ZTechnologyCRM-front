@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import './style.css'
 
 function Login() {
     const [login, setLogin] = useState({
         email: '',
         password: ''
     })
+
+    const [isManager, setIsManager] = useState(false); // Nuevo estado para saber si el usuario es un gestor
 
     const navigate = useNavigate()
 
@@ -21,6 +25,10 @@ function Login() {
             [event.target.id]: event.target.value
         })
     }
+
+    const handleRoleSelection = (isManagerSelected) => {
+        setIsManager(isManagerSelected);
+    };
 
     const submit = async (event) => {
         event.preventDefault()
@@ -40,6 +48,13 @@ function Login() {
                 throw new Error("Error al iniciar sesión");
             }
 
+            if (!isManager) {
+                navigate("/signup");
+            } else {
+                // Puedes mostrar un mensaje o realizar otra acción para los gestores
+                console.log("Eres un gestor. No puedes registrarte.");
+            }
+
             const dataResponse = await response.json() //await porque nos devuelve una promesa
 
             localStorage.setItem('user', JSON.stringify(dataResponse.user));
@@ -54,8 +69,13 @@ function Login() {
     }
     
     return (
-        <form className="d-flex mt-4" onSubmit={submit} id='form-login'>
-            <div className="form-group m-2">
+        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-primary">
+          <div className="form_container p-5 rounded bg-white">
+
+          <form className="d-grid" onSubmit={submit} id='form-login'>
+            
+            <h3 className="text-center">Iniciar Sesión</h3>
+            <div className="mt-4">
                 <input
                     type="text"
                     className="form-control"
@@ -65,7 +85,7 @@ function Login() {
                     onChange={ onChangeData }
                 />
             </div>
-            <div className="form-group m-2">
+            <div className="mt-4">
                 <input
                     type="password"
                     className="form-control"
@@ -75,16 +95,39 @@ function Login() {
                     onChange={ onChangeData }
                 />
             </div>
-            <div className="form-group m-2">
+            <div className="d-grid">
                 <button 
-                    className="btn btn-primary" 
+                    className="mt-4 btn btn-primary" 
                     type="submit"
                   >
                     Iniciar Sesión
                 </button>
             </div>
-             
-        </form>
+                         
+          </form>
+            <div className="mt-4">
+                ¿No tienes una cuenta?
+                    {isManager ? (
+                <p>Como gestor, no puedes registrarte.</p>
+                ) : (
+                    <Link to="/signup" className="ms-2">Regístrate aquí</Link>
+                )}
+            </div>
+          
+            <div className="mt-4">
+                <label htmlFor="check" className="custon-input-label ms-2">
+                <input
+                    className="custon-control custon-checkbox"
+                    type="checkbox"
+                    checked={isManager}
+                    onChange={(e) => handleRoleSelection(e.target.checked)}
+                />
+                Soy un gestor
+                </label>
+            </div>
+          </div>
+          
+        </div>
     )
 }
 

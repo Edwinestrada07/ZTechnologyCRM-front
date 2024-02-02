@@ -38,12 +38,6 @@ function Navbar() {
                         Product
                     </NavLink>
 
-                    {/* <NavLink 
-                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
-                        to="/cart"
-                    >
-                        Cart
-                    </NavLink> */}
                     <NavLink 
                         className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/user"
