@@ -120,7 +120,7 @@ const UserPage = () => {
    
   return (
     <>
-      <div>
+      <div className="container-fluid bg-dark text-white vh-100 p-5">
         <h2 className="text-center">Página de Usuarios</h2>
 
         <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} isCreating={!isEditUser} />

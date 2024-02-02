@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
-import './style.css'
+import '../style.css'
 
 function Login() {
     const [login, setLogin] = useState({
@@ -69,7 +69,7 @@ function Login() {
     }
     
     return (
-        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-primary">
+        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-dark">
           <div className="form_container p-5 rounded bg-white">
 
           <form className="d-grid" onSubmit={submit} id='form-login'>

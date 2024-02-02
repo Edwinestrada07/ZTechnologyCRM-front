@@ -64,7 +64,7 @@ function Signup() {
     };
 
     return (
-      <form className="login template d-flex justify-content-center align-items-center vh-100 bg-primary">
+      <form className="login template d-flex justify-content-center align-items-center vh-100 bg-dark">
 
           <div className="form_container p-5 rounded bg-white">
 
