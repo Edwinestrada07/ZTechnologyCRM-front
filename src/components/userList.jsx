@@ -5,7 +5,7 @@ const UserList = ({ users, deleteUser, getUser }) => {
 
     return (
     <> { users.length > 0 ?
-    <table className="table table-striped table-hover table-dark">
+    <table className="table table-striped table-hover table-dark mt-4">
         <thead>
             <tr>
                 <th>Nombre</th>

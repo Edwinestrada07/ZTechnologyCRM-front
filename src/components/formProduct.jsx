@@ -1,10 +1,10 @@
 function FormProduct(props) {
 
     const submit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
         
     props.onSubmit()
-    };
+    }
     
     return (
         <>
@@ -61,10 +61,33 @@ function FormProduct(props) {
                         Guardar
                     </button>
                 </div>
-            
+                <div className="form-group m-2">
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Buscar producto"
+                        name="searchTerm"
+                        id="searchTerm"
+                        value={props.searchTerm || ''}
+                        onChange={props.onSearchChange}
+                    />
+                </div>
+                <div className="form-group m-2">
+                    <button className="btn btn-primary" type="button" onClick={props.onSearch}>
+                        Buscar
+                    </button>
+                </div>
             </form>
 
-            <button className="btn btn-outline-primary mx-2" onClick={props.onClear} >Limpiar</button>
+            <div className="btn mx-2">
+                <button 
+                    className="btn btn-primary" 
+                    type="submit"
+                    onClick={props.onClear}
+                >
+                    Limpiar
+                </button>
+            </div>
         </>
     )
 }

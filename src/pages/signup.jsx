@@ -9,6 +9,17 @@ function Signup() {
         role: "ADMIN" // Por defecto, el rol es "admin"
     });
 
+    const handleChange = (event) => {
+        const { id, value } = event.target;
+        setSignup({
+          ...signup,
+          [id]: value,
+        })
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    }
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 
@@ -64,7 +75,7 @@ function Signup() {
     };
 
     return (
-      <form className="login template d-flex justify-content-center align-items-center vh-100 bg-primary">
+      <form className="login template d-flex justify-content-center align-items-center vh-100 bg-dark" onSubmit={handleSubmit}>
 
           <div className="form_container p-5 rounded bg-white">
 
@@ -109,7 +120,7 @@ function Signup() {
                 <label htmlFor="role" className="form-label" />
                   
                 <select 
-                    className="form-select" id="role">
+                    className="form-select" id="role" onChange={handleChange} value={signup.role}>
                         <option value="">Seleccione el rol</option>
                     <option value="GESTOR">Gestor</option>
                     <option value="ADMIN">Administrador</option>
@@ -143,5 +154,6 @@ function Signup() {
       </form>
     );
 }
+
 
 export default Signup

@@ -8,13 +8,18 @@ function Client() {
 
     const [state, dispatch] = useReducer(ClientReducer, { clients: [] } )
 
-    return <>
-        <h2 className="text-center">Página de Clientes</h2>
-        <ClientContext.Provider value={{ state, dispatch }} > 
-            <FormClient />
-            <TableClients />
-        </ClientContext.Provider>
-    </>
+    return ( 
+      <>
+        <div className="text-white p-5">
+            <h2 className="text-center font-weight-normal">Página de Clientes</h2>
+            
+            <ClientContext.Provider value={{ state, dispatch }} > 
+                <FormClient />
+                <TableClients />
+            </ClientContext.Provider>
+        </div>
+      </>
+    )
 }
 
 export default Client 

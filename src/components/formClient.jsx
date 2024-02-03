@@ -30,7 +30,8 @@ function FormClient() {
             });
     
             const responseData = await response.json();
-            dispatch({ type: 'createClient', client: responseData.client });
+            dispatch({ type: 'createClient', client: responseData.client })
+            
         } catch (error) {
             // Manejo de errores, por ejemplo, dispatch de un error
             console.error('Error submitting data:', error);
@@ -92,7 +93,6 @@ function FormClient() {
                     Guardar
                 </button>
             </div>
-
         </form>
     )
 }

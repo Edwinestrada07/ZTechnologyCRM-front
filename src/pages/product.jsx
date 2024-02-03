@@ -1,6 +1,6 @@
 import ProductList from "../components/productList"
-import FormProduct from '../components/formProduct';
-import { useEffect, useState } from "react";
+import FormProduct from '../components/formProduct'
+import { useEffect, useState } from "react"
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([])
@@ -55,7 +55,7 @@ const ProductsPage = () => {
         const responseData = await response.json()
         console.log('Producto creado:', responseData)
 
-        getProduct()
+        getProducts()
         setProduct({})
       
     } catch (error) {
@@ -120,14 +120,14 @@ const ProductsPage = () => {
     
     return (
       <>
-        <div>
-          <h2 className="text-center">Página de Productos</h2>
+        <div className="text-white p-5">
+          <h2 className="text-center font-weight-normal">Página de Productos</h2>
         
             <FormProduct product={product} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} />
             <ProductList products={products} getProduct={getProduct} deleteProduct={deleteProduct} />
         </div>
       </>
-  );
-};
+  )
+}
 
 export default ProductsPage 

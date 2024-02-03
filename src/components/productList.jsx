@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; 
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ProductList = ({ products, deleteProduct, getProduct}) => {
 
     return (
     <> { products.length > 0 ?
-    <table className="table table-striped table-hover table-light table-dark">
+    <table className="table table-striped table-hover table-light table-dark mt-4">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -35,7 +35,7 @@ const ProductList = ({ products, deleteProduct, getProduct}) => {
     </table>
     : <h3>No hay Productos</h3>}
     </>
-    );
-};
+    )
+}
 
-export default ProductList;
+export default ProductList

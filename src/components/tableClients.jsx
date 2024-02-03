@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const TableClients = () => {
 
-    const [clients, setClients] = useState([]);
+    const [clients, setClients] = useState([])
 
     const getClients = async() => {
         try {
@@ -14,11 +14,11 @@ const TableClients = () => {
                     authorization: localStorage.getItem('token')
                 }
             });
-            const clients = await response.json(); 
+            const clients = await response.json()
             setClients(clients);
             
         } catch (error) {
-            console.log("error", error);
+            console.log("error", error)
         }
     }
 
@@ -30,16 +30,16 @@ const TableClients = () => {
             }
         });
 
-        getClients();
+        getClients()
     };
     
     useEffect(() => {
-        getClients();
-    }, []); 
+        getClients()
+    }, []) 
 
     return (
     <> { clients.length > 0 ?
-    <table className="table table-striped table-hover table-light table-dark">
+    <table className="table table-striped table-hover table-light table-dark mt-4">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -66,7 +66,7 @@ const TableClients = () => {
     </table>
     : <h3>No hay Clientes</h3>}
     </>
-    );
-};
+    )
+}
 
 export default TableClients

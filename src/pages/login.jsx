@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
-import './style.css'
+import '../style.css'
 
 function Login() {
     const [login, setLogin] = useState({
@@ -45,19 +45,19 @@ function Login() {
             })
 
             if (!response.ok) {
-                throw new Error("Error al iniciar sesión");
+                throw new Error("Error al iniciar sesión")
             }
 
             if (!isManager) {
                 navigate("/signup");
             } else {
                 // Puedes mostrar un mensaje o realizar otra acción para los gestores
-                console.log("Eres un gestor. No puedes registrarte.");
+                console.log("Eres un gestor. No puedes registrarte.")
             }
 
             const dataResponse = await response.json() //await porque nos devuelve una promesa
 
-            localStorage.setItem('user', JSON.stringify(dataResponse.user));
+            localStorage.setItem('user', JSON.stringify(dataResponse.user))
             localStorage.setItem('token', dataResponse.token)
 
             navigate('/')
@@ -69,12 +69,12 @@ function Login() {
     }
     
     return (
-        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-primary">
+        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-dark">
           <div className="form_container p-5 rounded bg-white">
 
           <form className="d-grid" onSubmit={submit} id='form-login'>
             
-            <h3 className="text-center">Iniciar Sesión</h3>
+            <h3 className="text-center font-weight-normal">Iniciar Sesión</h3>
             <div className="mt-4">
                 <input
                     type="text"

@@ -1,5 +1,16 @@
+
+
 function Cart() {
-    return 'Parte para cotizaciones'
+
+    return ( 
+      <>
+        <div className="text-white p-5 vh-100">
+
+            <h2 className="text-center font-weight-normal">Página de Cotizaciones</h2>
+            
+        </div>
+      </>
+    )
 }
 
-export default Cart 
+export default Cart

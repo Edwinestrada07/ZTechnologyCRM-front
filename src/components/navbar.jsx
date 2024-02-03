@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 function Navbar() {
     const navigate = useNavigate();
@@ -11,35 +11,28 @@ function Navbar() {
     }
 
     return (
-        // <nav>
-        //     <Link to='/'>Home</Link><br />
-        //     <Link to='/Client'>Client</Link><br />
-        //     <Link to='/User'>User</Link><br />
-        //     <Link to='/Product'>Product</Link><br />
-        //     <Link onClick={logout}>Cerrar Sesión</Link>
-        // </nav>
 
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
+        <nav className="navbar navbar-expand-lg p-3 m-2 bg-transparent">
                     
             <Link 
-                className="navbar-brand" 
+                className="navbar-brand text-light" 
                 to="/"
             >
                 Store
             </Link>
 
             <div className="navbar-collapse">
-                <div className="navbar-nav">
+                <div className="navbar-nav mx-auto">
 
                     <NavLink 
-                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
+                        className={ ({isActive}) => `nav-item nav-link text-light ${ isActive ? 'active':'' }` }
                         to="/product"
                     >
                         Product
                     </NavLink>
 
                     <NavLink 
-                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
+                        className={ ({isActive}) => `nav-item nav-link text-light ${ isActive ? 'active':'' }` }
                         to="/user"
                         
                     >
@@ -47,7 +40,7 @@ function Navbar() {
                     </NavLink>
 
                     <NavLink 
-                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
+                        className={ ({isActive}) => `nav-item nav-link text-light ${ isActive ? 'active':'' }` }
                         to="/client"
                         
                     >
@@ -55,7 +48,7 @@ function Navbar() {
                     </NavLink>
 
                     <NavLink 
-                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
+                        className={ ({isActive}) => `nav-item nav-link text-light  ${ isActive ? 'active':'' }` }
                         to="/cart"
                         
                     >
@@ -71,7 +64,7 @@ function Navbar() {
                         Cambiar nombre
                     </span> 
                     <button
-                        className="nav-item nav-link btn"
+                        className="nav-item nav-link btn text-light"
                         onClick={ logout }
                     >
                         Logout
