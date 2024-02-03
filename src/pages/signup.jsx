@@ -75,7 +75,11 @@ function Signup() {
     };
 
     return (
+<<<<<<< HEAD
       <form className="login template d-flex justify-content-center align-items-center vh-100 bg-dark" onSubmit={handleSubmit}>
+=======
+      <form className="login template d-flex justify-content-center align-items-center vh-100 bg-dark">
+>>>>>>> 06bc34000890fb1a6bc307742af4e37b6faa59fe
 
           <div className="form_container p-5 rounded bg-white">
 

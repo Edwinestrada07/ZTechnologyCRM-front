@@ -12,7 +12,11 @@ function Navbar() {
 
     return (
 
+<<<<<<< HEAD
         <nav className="navbar navbar-expand-lg p-3 m-2 bg-transparent">
+=======
+        <nav className="navbar navbar-expand-lg p-4 m-2 bg-transparent">
+>>>>>>> 06bc34000890fb1a6bc307742af4e37b6faa59fe
                     
             <Link 
                 className="navbar-brand text-light" 
