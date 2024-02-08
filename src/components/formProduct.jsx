@@ -69,12 +69,16 @@ function FormProduct(props) {
                         name="searchTerm"
                         id="searchTerm"
                         value={props.searchTerm || ''}
-                        onChange={props.onSearchChange}
+                        onChange={ props.onSearchChange }
                     />
                 </div>
                 <div className="form-group m-2">
-                    <button className="btn btn-primary" type="button" onClick={props.onSearch}>
+                    <button 
+                        className="btn btn-primary" 
+                        type="button">
+
                         Buscar
+                        
                     </button>
                 </div>
             </form>

@@ -1,18 +1,15 @@
-<<<<<<< HEAD
 import React from 'react'
 import '../navbar.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-=======
-import React from 'react';
 import '../navbar.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
->>>>>>> 06bc34000890fb1a6bc307742af4e37b6faa59fe
+
 
 const Home = () => {
 
   return (
 
-<<<<<<< HEAD
+
     <div className="container-fluid text-white vh-90 p-5">
       
         <h1 className="text-center mb-3 font-weight-normal">Bienvenido a mi Sitio</h1>
@@ -42,13 +39,7 @@ const Home = () => {
                 </p>
                 
         </div>
-=======
-    <div className="container-fluid text-white vh-100 p-5">
-      
-      <h1 className="text-center mb-4">Bienvenido a mi Sitio</h1>
-      <p className="text-center">Explora y descubre cosas interesantes.</p>
-  
->>>>>>> 06bc34000890fb1a6bc307742af4e37b6faa59fe
+
     </div>
   )
 }

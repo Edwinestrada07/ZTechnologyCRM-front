@@ -113,7 +113,7 @@ const UserPage = () => {
 		}
 	}
 
-<<<<<<< HEAD
+
 	const onClear = () => {
 		setUser({})
 		setIsEditUser(false)
@@ -123,17 +123,6 @@ const UserPage = () => {
 		<>
 			<div className="text-white p-5">
 				<h2 className="text-center font-weight-normal">Página de Usuarios</h2>
-=======
-  const onClear = () => {
-    setUser({})
-    setIsEditUser(false)
-  }
-   
-  return (
-    <>
-      <div className="container-fluid bg-dark text-white vh-100 p-5">
-        <h2 className="text-center">Página de Usuarios</h2>
->>>>>>> 06bc34000890fb1a6bc307742af4e37b6faa59fe
 
 				<FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} isCreating={!isEditUser} />
 				<UserList users={users} getUser={getUser} deleteUser={deleteUser} />

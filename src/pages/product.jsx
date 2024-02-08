@@ -120,14 +120,10 @@ const ProductsPage = () => {
     
     return (
       <>
-<<<<<<< HEAD
+
         <div className="text-white p-5">
           <h2 className="text-center font-weight-normal">Página de Productos</h2>
-=======
-        <div className="container-fluid bg-dark text-white vh-100 p-5">
-          <h2 className="text-center">Página de Productos</h2>
->>>>>>> 06bc34000890fb1a6bc307742af4e37b6faa59fe
-        
+      
             <FormProduct product={product} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} />
             <ProductList products={products} getProduct={getProduct} deleteProduct={deleteProduct} />
         </div>
