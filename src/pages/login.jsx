@@ -48,13 +48,6 @@ function Login() {
                 throw new Error("Error al iniciar sesión")
             }
 
-            if (!isManager) {
-                navigate("/signup");
-            } else {
-                // Puedes mostrar un mensaje o realizar otra acción para los gestores
-                console.log("Eres un gestor. No puedes registrarte.")
-            }
-
             const dataResponse = await response.json() //await porque nos devuelve una promesa
 
             localStorage.setItem('user', JSON.stringify(dataResponse.user))

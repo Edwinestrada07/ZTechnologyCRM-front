@@ -6,7 +6,7 @@ function Signup() {
         name: "",
         email: "",
         password: "",
-        role: "ADMIN" // Por defecto, el rol es "admin"
+        role: ""
     });
 
     const handleChange = (event) => {
@@ -42,31 +42,32 @@ function Signup() {
         event.preventDefault();
 
         try {
-        // Validación de campos obligatorios
-        if (!signup.name || !signup.email || !signup.password) {
-            setErrorMessage("Por favor, complete todos los campos.");
-            return;
-        }
-        const response = await fetch("http://localhost:4000/signup", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json"
-            },
-            body: JSON.stringify(signup)
-        });
+            // Validación de campos obligatorios
+            if (!signup.name || !signup.email || !signup.password) {
+                setErrorMessage("Por favor, complete todos los campos.");
+                return;
+            }
+            const response = await fetch("http://localhost:4000/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(signup)
+            });
 
-        if (!response.ok) {
-            throw new Error("Error al registrar usuario");
-        }
+            if (!response.ok) {
+                throw new Error("Error al registrar usuario");
+            }
 
-        const dataResponse = await response.json();
-        localStorage.setItem("user", JSON.stringify(dataResponse.user));
-        localStorage.setItem("token", dataResponse.token);
+            const dataResponse = await response.json();
 
-        setSuccessMessage("Usuario registrado con éxito.");
-        setErrorMessage(""); // Limpiar cualquier mensaje de error existente
+            localStorage.setItem("user", JSON.stringify(dataResponse.user));
+            localStorage.setItem("token", dataResponse.token);
 
-        navigate("/");
+            setSuccessMessage("Usuario registrado con éxito.");
+            setErrorMessage(""); // Limpiar cualquier mensaje de error existente
+
+            navigate("/");
 
         } catch (error) {
             setErrorMessage("Error al registrar usuario. Verifica la información proporcionada.");
@@ -120,9 +121,8 @@ function Signup() {
             <div className="mt-4">
                 <label htmlFor="role" className="form-label" />
                   
-                <select 
-                    className="form-select" id="role" onChange={handleChange} value={signup.role}>
-                        <option value="">Seleccione el rol</option>
+                <select className="form-select" id="role" onChange={handleChange} value={signup.role}>
+                    <option value="">Seleccione el rol</option>
                     <option value="GESTOR">Gestor</option>
                     <option value="ADMIN">Administrador</option>
                 </select>
