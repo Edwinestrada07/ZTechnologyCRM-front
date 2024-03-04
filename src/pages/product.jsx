@@ -1,6 +1,6 @@
-import ProductList from "../components/productList"
+import ProductList from '../components/productList'
 import FormProduct from '../components/formProduct'
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([])
@@ -9,10 +9,10 @@ const ProductsPage = () => {
 
     const getProducts = async () => {
         try {
-            const response = await fetch("http://localhost:4000/product", {
-                method: "GET",
+            const response = await fetch('http://localhost:4000/product', {
+                method: 'GET',
                 headers: {
-                authorization: localStorage.getItem("token")
+                    authorization: localStorage.getItem('token')
                 }
             })
 
@@ -20,16 +20,16 @@ const ProductsPage = () => {
             setProducts(products)
 
         } catch (error) {
-        console.error("error", error)
+            console.error('error', error)
         }
     }
 
     const getProduct = async (id) => {
         try {
             const response = await fetch(`http://localhost:4000/product/${id}`, {
-                method: "GET",
+                method: 'GET',
                 headers: {
-                authorization: localStorage.getItem("token")
+                    authorization: localStorage.getItem('token')
                 }
             })
 
@@ -38,12 +38,12 @@ const ProductsPage = () => {
             setIsEditProduct(true)
 
         } catch (error) {
-        console.error("error", error)
+            console.error('error', error)
         }
     }
 
     const createProduct = async (product) => {
-            try {
+        try {
             const response = await fetch('http://localhost:4000/product', {
                 method: 'POST',
                 headers: {
@@ -57,7 +57,7 @@ const ProductsPage = () => {
 
             getProducts()
             setProduct({})
-        
+
         } catch (error) {
             console.error('Error al crear Producto', error)
         }
@@ -77,7 +77,7 @@ const ProductsPage = () => {
             console.log('Producto actualizado:', responseData)
 
             getProducts()
-            
+
         } catch (error) {
             console.error('Error al actualizar Producto', error)
         }
@@ -85,9 +85,9 @@ const ProductsPage = () => {
 
     const deleteProduct = async (id) => {
         await fetch(`http://localhost:4000/product/${id}`, {
-            method: "DELETE",
+            method: 'DELETE',
             headers: {
-                authorization: localStorage.getItem("token")
+                authorization: localStorage.getItem('token')
             }
         })
 
@@ -106,7 +106,7 @@ const ProductsPage = () => {
     }
 
     const onSubmit = () => {
-        if(isEditProduct){
+        if (isEditProduct) {
             updateProduct(product)
         } else {
             createProduct(product)
@@ -117,17 +117,17 @@ const ProductsPage = () => {
         setProduct({})
         setIsEditProduct(false)
     }
-        
+
     return (
-      <>
+        <div className="container">
             <div className="text-white p-5">
-                <h2 className="text-center font-weight-normal">Página de Productos</h2>
-            
-                    <FormProduct product={product} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} />
-                    <ProductList products={products} getProduct={getProduct} deleteProduct={deleteProduct} />
+                <h2 className="text-center font-weight-normal"><strong>Página de Productos</strong></h2>
+
+                <FormProduct product={product} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} />
+                <ProductList products={products} getProduct={getProduct} deleteProduct={deleteProduct} />
             </div>
-      </>
-  )
+        </div>
+    )
 }
 
-export default ProductsPage 
+export default ProductsPage
