@@ -52,10 +52,17 @@ function FormProduct(props) {
                 />
             </div>
             <div className="form-group m-2">
-                <button className="btn btn-primary mr-2" type="submit">
+                <button 
+                    className="btn btn-primary mr-2" 
+                    type="submit"
+                  >
                     Guardar
                 </button>
-                <button className="btn btn-secondary" type="button" onClick={props.onClear}>
+                <button 
+                    className="btn btn-secondary" 
+                    type="button" 
+                    onClick={props.onClear}
+                  >
                     Limpiar
                 </button>
             </div>

@@ -61,7 +61,7 @@ const Home = () => {
                                 Visualización del embudo de ventas para evaluar el progreso.
                                 Generación de informes de ventas y rendimiento.
                             </p>
-                            <a href="/cart" className="btn btn-primary d-block mx-auto">Visualiza Cotizaciones</a>
+                            <a href="/quote" className="btn btn-primary d-block mx-auto">Visualiza Cotizaciones</a>
                         </div>
                     </div>
                 </div>

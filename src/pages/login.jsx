@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../style.css'
 
 function Login() {
@@ -28,11 +28,10 @@ function Login() {
 
     const handleRoleSelection = (isManagerSelected) => {
         setIsManager(isManagerSelected);
-    };
+    }
 
     const submit = async (event) => {
         event.preventDefault()
-        //console.log(login) //Para ver la información del form en la consola
 
         try {
             //Con el fetch conectamos nuestro login al back

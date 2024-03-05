@@ -19,7 +19,7 @@ function Navbar() {
                 className="navbar-brand text-light" 
                 to="/"
             >
-                Store
+                Inicio
             </Link>
 
             <div className="navbar-collapse">
@@ -29,7 +29,7 @@ function Navbar() {
                         className={ ({isActive}) => `nav-item nav-link text-light ${ isActive ? 'active':'' }` }
                         to="/product"
                     >
-                        Product
+                        Productos
                     </NavLink>
 
                     <NavLink 
@@ -37,7 +37,7 @@ function Navbar() {
                         to="/user"
                         
                     >
-                        Users
+                        Usuarios
                     </NavLink>
 
                     <NavLink 
@@ -45,15 +45,15 @@ function Navbar() {
                         to="/client"
                         
                     >
-                      Clients
+                      Clientes
                     </NavLink>
 
                     <NavLink 
                         className={ ({isActive}) => `nav-item nav-link text-light  ${ isActive ? 'active':'' }` }
-                        to="/cart"
+                        to="/quote"
                         
                     >
-                      Cart
+                      Cotización
                     </NavLink>
                 </div>
             </div>

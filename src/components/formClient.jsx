@@ -1,9 +1,8 @@
-import { useContext, useState } from "react"
-import { ClientContext } from "../contexts/clients.context"
+import { useContext, useState } from 'react'
+import { ClientContext } from '../contexts/clients.context'
 
 function FormClient() {
     const [client, setClient] = useState({})
-
     const { state, dispatch } = useContext(ClientContext)
 
     const onChangeData = (event) => {
@@ -14,11 +13,11 @@ function FormClient() {
     }
 
     const submit = async (event) => {
-        event.preventDefault();
-        dispatch({ type: 'loading' });
+        event.preventDefault()
+        dispatch({ type: 'loading' })
         
         try {
-            await new Promise(resolve => setTimeout(resolve, 500)); // Simula el tiempo de espera
+            await new Promise(resolve => setTimeout(resolve, 500)) // Simula el tiempo de espera
     
             const response = await fetch('http://localhost:4000/client', {
                 method: 'POST',
@@ -27,25 +26,23 @@ function FormClient() {
                     authorization: localStorage.getItem('token')
                 },
                 body: JSON.stringify(client)
-            });
+            })
     
-            const responseData = await response.json();
+            const responseData = await response.json()
             dispatch({ type: 'createClient', client: responseData.client })
             
         } catch (error) {
-            // Manejo de errores, por ejemplo, dispatch de un error
-            console.error('Error submitting data:', error);
-            dispatch({ type: 'error', error: 'Error submitting data' });
+            console.error('Error al enviar datos:', error);
+            dispatch({ type: 'error', error: 'Error al enviar datos' });
         }
-    };
-    
+    }
 
     if(state.status === 'loading') 
         return 'loading...'
 
     return (
-        <form className="d-flex" onSubmit={submit}>
-            <div className="form-group m-2">
+        <form onSubmit={submit} className="d-flex flex-wrap align-items-center">
+            <div className="form-group m-2 flex-grow-1">
                 <input
                     type="text"
                     className="form-control"
@@ -55,9 +52,9 @@ function FormClient() {
                     onChange={ onChangeData }
                 />
             </div>
-            <div className="form-group m-2">
+            <div className="form-group m-2 flex-grow-1">
                 <input
-                    type="text"
+                    type="email"
                     className="form-control"
                     placeholder="Correo"
                     name="email"
@@ -65,7 +62,7 @@ function FormClient() {
                     onChange={ onChangeData }
                 />
             </div>
-            <div className="form-group m-2">
+            <div className="form-group m-2 flex-grow-1">
                 <input
                     type="text"
                     className="form-control"
@@ -75,7 +72,7 @@ function FormClient() {
                     onChange={ onChangeData }
                 />
             </div>
-            <div className="form-group m-2">
+            <div className="form-group m-2 flex-grow-1">
                 <input
                     type="number"
                     className="form-control"
@@ -86,10 +83,7 @@ function FormClient() {
                 />
             </div>
             <div className="form-group m-2">
-                <button 
-                    className="btn btn-primary" 
-                    type="submit"
-                  >
+                <button className="btn btn-primary mr-2" type="submit">
                     Guardar
                 </button>
             </div>

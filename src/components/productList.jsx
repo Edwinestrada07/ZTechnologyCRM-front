@@ -23,8 +23,18 @@ const ProductList = ({ products, deleteProduct, getProduct }) => {
                                     <td>{product.stock}</td>
                                     <td>{product.description}</td>
                                     <td>
-                                        <button className="btn btn-primary mr-3" onClick={() => deleteProduct(product.id)}>Eliminar</button>
-                                        <button className="btn btn-primary" onClick={() => getProduct(product.id)}>Actualizar</button>
+                                        <button 
+                                            className="btn btn-primary mr-3" 
+                                            onClick={() => deleteProduct(product.id)}
+                                          >
+                                            Eliminar
+                                        </button>
+                                        <button 
+                                            className="btn btn-primary" 
+                                            onClick={() => getProduct(product.id)}
+                                          >
+                                            Actualizar
+                                        </button>
                                     </td>
                                 </tr>
                             ))}

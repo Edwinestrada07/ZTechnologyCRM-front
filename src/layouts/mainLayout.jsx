@@ -1,6 +1,6 @@
-import { Outlet, useNavigate } from "react-router-dom"
-import Navbar from "../components/navbar"
-import { useEffect } from "react"
+import { Outlet, useNavigate } from 'react-router-dom'
+import Navbar from '../components/navbar'
+import { useEffect } from 'react'
 
 function MainLayout() {
     const navigate = useNavigate()

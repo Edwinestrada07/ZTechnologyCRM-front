@@ -23,8 +23,18 @@ const UserList = ({ users, deleteUser, getUser }) => {
                                     <td>*******</td> {/* Mostrar asteriscos en lugar de la contraseña */}
                                     <td>{user.role}</td>
                                     <td>
-                                        <button className="btn btn-primary mr-3" onClick={() => deleteUser(user.id)}>Eliminar</button>
-                                        <button className="btn btn-primary" onClick={() => getUser(user.id)}>Actualizar</button>
+                                        <button 
+                                            className="btn btn-primary mr-3" 
+                                            onClick={() => deleteUser(user.id)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                        <button 
+                                            className="btn btn-primary" 
+                                            onClick={() => getUser(user.id)}
+                                        >
+                                            Actualizar
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -35,7 +45,7 @@ const UserList = ({ users, deleteUser, getUser }) => {
                 <h3>No hay Usuarios</h3>
             )}
         </>
-    );
-};
+    )
+}
 
-export default UserList;
+export default UserList
