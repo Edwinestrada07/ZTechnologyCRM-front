@@ -46,7 +46,7 @@ const Home = () => {
                             <p className="card-text p-3 font-monospace">
                                 Registro de nuevos productos con información detallada.
                                 Visualización y edición de productos. Lleva un control de todos los productos que se tienen en la tienda
-                                Seguimiento de interacciones y actividades con los clientes. Ayudando al registro de productos y llevando un mejor control.
+                                Seguimiento de interacciones y actividades con los clientes.
                             </p>
                             <a href="/product" className="btn btn-primary d-block mx-auto">Registrar Productos</a>
                         </div>

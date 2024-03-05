@@ -1,5 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import Navbar from '../components/navbar'
+import Footer from '../components/footer'
 import { useEffect } from 'react'
 
 function MainLayout() {
@@ -15,6 +16,7 @@ function MainLayout() {
         <>  
             <Navbar />
             <Outlet />
+            <Footer />
         </>
     )
 }

@@ -11,44 +11,50 @@ function Quote() {
         price: '',
         description: '',
         subtotal: '',
+        shippingPrice: '',
         total: ''
     });
+    const [quoteList, setQuoteList] = useState([]);
 
     useEffect(() => {
-        const getClients = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:4000/client', {
+                // Obtener clientes
+                const clientsResponse = await fetch('http://localhost:4000/client', {
                     method: 'GET',
                     headers: {
                         authorization: localStorage.getItem('token')
                     }
                 });
-                const clients = await response.json();
-                setClients(clients);
-            } catch (error) {
-                console.error("Error al obtener clientes:", error); // Corregido aquí
-            }
-        }
-        
-        const getProducts = async () => {
-            try {
-                const response = await fetch('http://localhost:4000/product', {
-                    method: 'GET',
-                    headers: {
-                        authorization: localStorage.getItem('token')
-                    }
-                });
-                const products = await response.json();
-                setProducts(products);
-            } catch (error) {
-                console.error('Error al obtener productos:', error); // Corregido aquí
-            }
-        }
-        
+                const clientsData = await clientsResponse.json();
+                setClients(clientsData);
 
-        getClients();
-        getProducts();
-    }, []);
+                // Obtener productos
+                const productsResponse = await fetch('http://localhost:4000/product', {
+                    method: 'GET',
+                    headers: {
+                        authorization: localStorage.getItem('token')
+                    }
+                });
+                const productsData = await productsResponse.json();
+                setProducts(productsData);
+
+                // Obtener cotizaciones
+                const quotesResponse = await fetch('http://localhost:4000/quote', {
+                    method: 'GET',
+                    headers: {
+                        authorization: localStorage.getItem('token')
+                    }
+                });
+                const quotesData = await quotesResponse.json();
+                setQuoteList(quotesData);
+            } catch (error) {
+                console.error("Error al obtener datos:", error);
+            }
+        };
+
+        fetchData();
+    }, [quoteCreated]); // Actualiza la lista de cotizaciones cuando se crea una nueva
 
     const handleClientChange = (event) => {
         setSelectedClient(event.target.value);
@@ -71,7 +77,8 @@ function Quote() {
             const response = await fetch('http://localhost:4000/quote', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    authorization: localStorage.getItem('token')
                 },
                 body: JSON.stringify({
                     clientId: selectedClient,
@@ -81,12 +88,31 @@ function Quote() {
             });
 
             if (response.ok) {
-                setQuoteCreated(true);
+                setQuoteCreated(!quoteCreated); // Cambia el estado para actualizar la lista de cotizaciones
             } else {
                 console.error('No se pudo crear la cotización');
             }
         } catch (error) {
             console.error('Error al crear cotización:', error);
+        }
+    }
+
+    const deleteQuote = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:4000/quote/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    authorization: localStorage.getItem('token')
+                }
+            });
+
+            if (response.ok) {
+                setQuoteCreated(!quoteCreated); // Cambia el estado para actualizar la lista de cotizaciones
+            } else {
+                console.error('No se pudo eliminar la cotización');
+            }
+        } catch (error) {
+            console.error('Error al eliminar cotización:', error);
         }
     }
 
@@ -100,7 +126,7 @@ function Quote() {
                         <select id="clientSelect" className="form-select" onChange={handleClientChange}>
                             <option value="">Seleccione un cliente</option>
                             {clients.map(client => (
-                                <option key={client.id} value={client.id}>{client.name} -- {client.phone}</option>
+                                <option key={client.id} value={client.id}>{client.name}</option>
                             ))}
                         </select>
                     </div>
@@ -109,7 +135,7 @@ function Quote() {
                         <select id="productSelect" className="form-select" onChange={handleProductChange}>
                             <option value="">Seleccione un producto</option>
                             {products.map(product => (
-                                <option key={product.id} value={product.id}>{product.title} -- ${product.price}</option>
+                                <option key={product.id} value={product.id}>{product.title} -- (${product.price})</option>
                             ))}
                         </select>
                     </div>
@@ -139,7 +165,7 @@ function Quote() {
                     </div>
 
                     <div className="col-12">
-                        <textarea 
+                        <input 
                             className="form-control"
                             id="inputDescription" 
                             placeholder="Descripción"
@@ -157,6 +183,18 @@ function Quote() {
                             placeholder="SubTotal"
                             name="subtotal" 
                             value={quoteData.subtotal} 
+                            onChange={handleInputChange} 
+                        />
+                    </div>
+
+                    <div className="col-md-6">
+                        <input 
+                            type="number" 
+                            className="form-control"
+                            id="inputshippingPrice" 
+                            placeholder="Precio Envío"
+                            name="shippingPrice" 
+                            value={quoteData.shippingPrice} 
                             onChange={handleInputChange} 
                         />
                     </div>
@@ -190,6 +228,28 @@ function Quote() {
                         </div>
                     )}
                 </form>
+
+                <div className="row mt-3">
+                    {/* Renderiza las tarjetas de cotización */}
+                    {quoteList.map(quote => (
+                        <div key={quote.id} className="col-md-4 mb-3">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Cotización #{quote.id}</h5>
+                                    <p className="card-text">Cantidad: {quote.cant}</p>
+                                    <p className="card-text">Precio: {quote.price}</p>
+                                    <p className="card-text">Descripción: {quote.description}</p>
+                                    <p className="card-text">Subtotal: {quote.subtotal}</p>
+                                    <p className="card-text">Precio Envío: {quote.shippingPrice}</p>
+                                    <p className="card-text">Total: {quote.total}</p>
+                                    <p className="card-text">Cliente: {clients.find(client => client.id === quote.clientId)?.name}</p>
+                                    <button className="btn btn-danger mr-2" onClick={() => deleteQuote(quote.id)}>Eliminar</button>
+                                    {/* Agrega aquí la lógica para modificar la cotización */}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>  
     )
