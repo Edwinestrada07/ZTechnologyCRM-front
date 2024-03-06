@@ -8,7 +8,7 @@ import Client from "./pages/client"
 import Quote from "./pages/quote"
 import Login from "./pages/login"
 import Signup from "./pages/signup"
-
+import Profile from "./pages/profile"
 
 const router = createBrowserRouter([ 
     {
@@ -35,6 +35,10 @@ const router = createBrowserRouter([
                 path: '/quote',
                 Component: Quote
             },
+            {
+                path: '/passwordChange',
+                Component: Profile
+            }
         ]
     },
     {

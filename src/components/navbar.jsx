@@ -80,9 +80,12 @@ function Navbar() {
                 <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
                     <ul className="navbar-nav ml-auto">
                     
-                        <span className="nav-item nav-link text-primary">
-                            Cambiar nombre
-                        </span> 
+                        <NavLink 
+                            className={ ({isActive}) => `nav-item nav-link text-light ${ isActive ? 'active':'' }` }
+                            to="/profile"
+                        >
+                            <strong>Cambiar Contraseña</strong>
+                        </NavLink> 
                         <button
                             className="nav-item nav-link btn"
                             onClick={ logout }
