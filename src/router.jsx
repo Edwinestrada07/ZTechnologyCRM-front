@@ -36,7 +36,7 @@ const router = createBrowserRouter([
                 Component: Quote
             },
             {
-                path: '/passwordChange',
+                path: '/Profile',
                 Component: Profile
             }
         ]

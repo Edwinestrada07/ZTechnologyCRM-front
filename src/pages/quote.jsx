@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 function Quote() {
-    const [clients, setClients] = useState([]);
-    const [products, setProducts] = useState([]);
-    const [selectedClient, setSelectedClient] = useState('');
-    const [selectedProduct, setSelectedProduct] = useState('');
-    const [quoteCreated, setQuoteCreated] = useState(false);
+    const [clients, setClients] = useState([])
+    const [products, setProducts] = useState([])
+    const [selectedClient, setSelectedClient] = useState('')
+    const [selectedProduct, setSelectedProduct] = useState('')
+    const [quoteCreated, setQuoteCreated] = useState(false)
     const [quoteData, setQuoteData] = useState({
         cant: '',
         price: '',
@@ -13,8 +13,8 @@ function Quote() {
         subtotal: '',
         shippingPrice: '',
         total: ''
-    });
-    const [quoteList, setQuoteList] = useState([]);
+    })
+    const [quoteList, setQuoteList] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,7 +35,7 @@ function Quote() {
                     headers: {
                         authorization: localStorage.getItem('token')
                     }
-                });
+                })
                 const productsData = await productsResponse.json();
                 setProducts(productsData);
 
@@ -45,31 +45,32 @@ function Quote() {
                     headers: {
                         authorization: localStorage.getItem('token')
                     }
-                });
-                const quotesData = await quotesResponse.json();
-                setQuoteList(quotesData);
+                })
+                const quotesData = await quotesResponse.json()
+                setQuoteList(quotesData)
+
             } catch (error) {
-                console.error("Error al obtener datos:", error);
+                console.error("Error al obtener datos:", error)
             }
-        };
+        }
 
         fetchData();
     }, [quoteCreated]); // Actualiza la lista de cotizaciones cuando se crea una nueva
 
     const handleClientChange = (event) => {
-        setSelectedClient(event.target.value);
+        setSelectedClient(event.target.value)
     }
 
     const handleProductChange = (event) => {
-        setSelectedProduct(event.target.value);
+        setSelectedProduct(event.target.value)
     }
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
         setQuoteData({
             ...quoteData,
             [name]: value
-        });
+        })
     }
 
     const createQuote = async () => {
@@ -85,15 +86,15 @@ function Quote() {
                     productId: selectedProduct,
                     ...quoteData
                 })
-            });
+            })
 
             if (response.ok) {
-                setQuoteCreated(!quoteCreated); // Cambia el estado para actualizar la lista de cotizaciones
+                setQuoteCreated(!quoteCreated) // Cambia el estado para actualizar la lista de cotizaciones
             } else {
-                console.error('No se pudo crear la cotización');
+                console.error('No se pudo crear la cotización')
             }
         } catch (error) {
-            console.error('Error al crear cotización:', error);
+            console.error('Error al crear cotización:', error)
         }
     }
 
@@ -104,20 +105,20 @@ function Quote() {
                 headers: {
                     authorization: localStorage.getItem('token')
                 }
-            });
+            })
 
             if (response.ok) {
                 setQuoteCreated(!quoteCreated); // Cambia el estado para actualizar la lista de cotizaciones
             } else {
-                console.error('No se pudo eliminar la cotización');
+                console.error('No se pudo eliminar la cotización')
             }
         } catch (error) {
-            console.error('Error al eliminar cotización:', error);
+            console.error('Error al eliminar cotización:', error)
         }
     }
 
     return (
-        <div className="container mt-5">
+        <div className="container">
             <div className="text-white p-5">
                 <h2 className="text-center font-weight-normal"><strong>Página de cotizaciones</strong></h2>
 
@@ -255,4 +256,4 @@ function Quote() {
     )
 }
 
-export default Quote;
+export default Quote

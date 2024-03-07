@@ -1,6 +1,8 @@
 import React from 'react'
 
 const UserList = ({ users, deleteUser, getUser }) => {
+    const userRole = JSON.parse(localStorage.getItem('user')).role
+
     return (
         <>
             {users.length > 0 ? (
@@ -20,18 +22,20 @@ const UserList = ({ users, deleteUser, getUser }) => {
                                 <tr key={user.id}>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-                                    <td>*******</td> {/* Mostrar asteriscos en lugar de la contraseña */}
+                                    <td>*******</td>
                                     <td>{user.role}</td>
                                     <td>
                                         <button 
                                             className="btn btn-primary mr-3" 
                                             onClick={() => deleteUser(user.id)}
+                                            disabled={userRole === 'GESTOR'} 
                                         >
                                             Eliminar
                                         </button>
                                         <button 
                                             className="btn btn-primary" 
                                             onClick={() => getUser(user.id)}
+                                            disabled={userRole === 'GESTOR'} 
                                         >
                                             Actualizar
                                         </button>

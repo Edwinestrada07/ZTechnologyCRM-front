@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 const Profile = () => {
-    const [password, setPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmNewPassword, setConfirmNewPassword] = useState('');
-    const [error, setError] = useState(null);
+    const [password, setPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [confirmNewPassword, setConfirmNewPassword] = useState('')
+    const [error, setError] = useState(null)
 
-    const PasswordChange = () => {
-        const token = localStorage.getItem('token');
+    const handlePasswordChange = () => {
+        const token = localStorage.getItem('token')
 
         if (!token) {
-            setError('No se ha encontrado un token de autenticación');
-            return;
+            setError('No se ha encontrado un token de autenticación')
+            return
         }
 
         if (newPassword !== confirmNewPassword) {
-            setError('Las contraseñas nuevas no coinciden');
-            return;
+            setError('Las contraseñas nuevas no coinciden')
+            return
         }
 
         fetch('http://localhost:4000/user/change-password', {
@@ -29,67 +29,66 @@ const Profile = () => {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Hubo un error al cambiar la contraseña');
+                throw new Error('Hubo un error al cambiar la contraseña')
             }
-            return response.json();
+            return response.json()
         })
         .then(data => {
-            console.log('Contraseña cambiada:', data);
-            setPassword('');
-            setNewPassword('');
-            setConfirmNewPassword('');
-            setError(null);
+            console.log('Contraseña cambiada:', data)
+
+            setPassword('')
+            setNewPassword('')
+            setConfirmNewPassword('')
+            setError(null)
         })
-        .catch(error => setError(error.message));
-    };
+        .catch(error => setError(error.message))
+    }
 
     return (
         <div className="container">
-            <h2 className="text-center mt-4 mb-5">Información Acceso</h2>
+            <h2 className="text-center font-weight-normal text-light m-2"><strong>Página de Acceso</strong></h2>
 
-            <div className="row justify-content-center">
+            <div className="form-group m-2 flex-grow-1">
                 {error && <div className="alert alert-danger col-md-6">{error}</div>}
 
                 <div className="col-md-6">
-                    <div className="m-3">
-                        <h3 className="text-center">Cambiar Contraseña</h3>
+                    <div className="m-5">
+                        <h3 className="text">Cambiar Contraseña</h3>
                         <label className="text-a">
                             Contraseña actual
                             <input
-                                className="form-control mt-2"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                className="form-styling-inf"
+                                type="password" 
+                                value={password} 
+                                onChange={e => setPassword(e.target.value)} 
                             />
                         </label>
-
+                        
                         <label className="text-a">
                             Nueva contraseña
                             <input
-                                className="form-control mt-2"
-                                type="password"
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
+                                className="form-styling-inf"
+                                type="password"  
+                                value={newPassword} 
+                                onChange={e => setNewPassword(e.target.value)} 
                             />
                         </label>
 
                         <label className="text-a">
                             Confirmar nueva contraseña
                             <input
-                                className="form-control mt-2"
-                                type="password"
-                                value={confirmNewPassword}
-                                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                                className="form-styling-inf"
+                                type="password"  
+                                value={confirmNewPassword} 
+                                onChange={e => setConfirmNewPassword(e.target.value)} 
                             />
                         </label>
-                        <button className="btn btn-primary mt-3" onClick={PasswordChange}>
-                            Cambiar Contraseña
-                        </button>
+                        <button className="btn-animate" onClick={handlePasswordChange}>Cambiar Contraseña</button>
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default Profile;
+export default Profile

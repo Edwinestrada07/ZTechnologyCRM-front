@@ -6,6 +6,7 @@ const UserPage = () => {
     const [users, setUsers] = useState([])
     const [user, setUser] = useState({})
     const [isEditUser, setIsEditUser] = useState(false)
+    const [isManager, setIsManager] = useState(false)
 
     const getUsers = async () => {
         try {
@@ -14,7 +15,7 @@ const UserPage = () => {
                 headers: {
                     authorization: localStorage.getItem('token')
                 }
-            })
+            });
 
             const users = await response.json()
             setUsers(users)
@@ -31,7 +32,7 @@ const UserPage = () => {
                 headers: {
                     authorization: localStorage.getItem('token')
                 }
-            })
+            });
 
             const user = await response.json()
             setUser(user)
@@ -41,6 +42,13 @@ const UserPage = () => {
             console.error('error', error)
         }
     }
+
+    useEffect(() => {
+        getUsers();
+        // Verificar el rol del usuario almacenado en el localStorage
+        const userRole = JSON.parse(localStorage.getItem('user')).role;
+        setIsManager(userRole === 'GESTOR');
+    }, [])
 
     const createUser = async (user) => {
         try {
@@ -72,7 +80,7 @@ const UserPage = () => {
                     authorization: localStorage.getItem('token')
                 },
                 body: JSON.stringify(user)
-            })
+            });
             const responseData = await response.json()
             console.log('Usuario actualizado:', responseData)
 
@@ -93,10 +101,6 @@ const UserPage = () => {
 
         getUsers()
     }
-
-    useEffect(() => {
-        getUsers()
-    }, [])
 
     const onChangeData = (event) => {
         setUser({
@@ -120,14 +124,14 @@ const UserPage = () => {
 
     return (
         <>
-			<div className="container">
-				<div className="text-white p-5">
+            <div className="container">
+                <div className="text-white p-5">
                     <h2 className="text-center font-weight-normal"><strong>Página de Usuarios</strong></h2>
 
-                    <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} isCreating={!isEditUser} />
-                    <UserList users={users} getUser={getUser} deleteUser={deleteUser} />
+                    <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} isCreating={!isEditUser} disabled={isManager} />
+                    <UserList users={users} getUser={getUser} deleteUser={deleteUser} disabled={isManager} />
                 </div>
-			</div>
+            </div>
         </>
     )
 }
