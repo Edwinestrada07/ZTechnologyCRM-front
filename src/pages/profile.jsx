@@ -6,7 +6,9 @@ const Profile = () => {
     const [confirmNewPassword, setConfirmNewPassword] = useState('')
     const [error, setError] = useState(null)
 
-    const handlePasswordChange = () => {
+    const handlePasswordChange = (e) => {
+        e.preventDefault()
+
         const token = localStorage.getItem('token')
 
         if (!token) {
@@ -46,44 +48,51 @@ const Profile = () => {
 
     return (
         <div className="container">
-            <h2 className="text-center font-weight-normal text-light m-2"><strong>Página de Acceso</strong></h2>
-
-            <div className="form-group m-2 flex-grow-1">
-                {error && <div className="alert alert-danger col-md-6">{error}</div>}
-
+            <div className="row justify-content-center">
                 <div className="col-md-6">
-                    <div className="m-5">
-                        <h3 className="text">Cambiar Contraseña</h3>
-                        <label className="text-a">
-                            Contraseña actual
-                            <input
-                                className="form-styling-inf"
-                                type="password" 
-                                value={password} 
-                                onChange={e => setPassword(e.target.value)} 
-                            />
-                        </label>
-                        
-                        <label className="text-a">
-                            Nueva contraseña
-                            <input
-                                className="form-styling-inf"
-                                type="password"  
-                                value={newPassword} 
-                                onChange={e => setNewPassword(e.target.value)} 
-                            />
-                        </label>
+                    <div className="text-white p-5">
+                        <h2 className="text-center font-weight-normal mb-4">Página de Acceso</h2>
+                        {error && <div className="alert alert-danger">{error}</div>}
 
-                        <label className="text-a">
-                            Confirmar nueva contraseña
-                            <input
-                                className="form-styling-inf"
-                                type="password"  
-                                value={confirmNewPassword} 
-                                onChange={e => setConfirmNewPassword(e.target.value)} 
-                            />
-                        </label>
-                        <button className="btn-animate" onClick={handlePasswordChange}>Cambiar Contraseña</button>
+                        <form onSubmit={handlePasswordChange}>
+                            <h3 className="text-center mb-4">Cambiar Contraseña</h3>
+                            <div className="form-group">
+                                <input
+                                    className="form-control"
+                                    placeholder='Contraseña Actual'
+                                    type="password" 
+                                    value={password} 
+                                    onChange={e => setPassword(e.target.value)} 
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    className="form-control"
+                                    placeholder='Nueva contraseña'
+                                    type="password"  
+                                    value={newPassword} 
+                                    onChange={e => setNewPassword(e.target.value)} 
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    className="form-control"
+                                    placeholder='Confirmar nueva contraseña'
+                                    type="password"  
+                                    value={confirmNewPassword} 
+                                    onChange={e => setConfirmNewPassword(e.target.value)} 
+                                />
+                            </div>
+                            <div className="form-group text-center">
+                                <button 
+                                    className="btn btn-primary" 
+                                    onClick={handlePasswordChange}
+                                    type="submit"
+                                >
+                                    Cambiar Contraseña
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,8 @@ function Login() {
         email: '',
         password: ''
     })
+    const [error, setError] = useState('')
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -36,9 +38,12 @@ function Login() {
                 body: JSON.stringify(login) //Va la Data como un String
             })
 
-            if (!response.ok) {
-                throw new Error("Error al iniciar sesión")
+            // Validación de campos obligatorios
+            if (!login.email || !login.password) {
+                setError('Por favor, complete todos los campos.')
+                return
             }
+
 
             const dataResponse = await response.json() //await porque nos devuelve una promesa
 
@@ -56,6 +61,8 @@ function Login() {
     return (
         <div className="login template d-flex justify-content-center align-items-center vh-100 bg-dark">
             <div className="form_container p-5 rounded bg-white">
+
+                {error && <div className="alert alert-danger">{error}</div>}
 
                 <form className="d-grid" onSubmit={submit} id='form-login'>
                     
