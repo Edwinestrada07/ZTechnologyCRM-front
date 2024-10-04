@@ -1,8 +1,4 @@
 import React from 'react'
-import '../navbar.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '../navbar.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Home = () => {
 

@@ -6,9 +6,8 @@ import Product from "./pages/product"
 import User from "./pages/user"
 import Client from "./pages/client"
 import Quote from "./pages/quote"
-import Login from "./pages/login"
-import Signup from "./pages/signup"
 import Profile from "./pages/profile"
+import AuthContainer from "./AuthContainer"
 
 const router = createBrowserRouter([ 
     {
@@ -43,11 +42,11 @@ const router = createBrowserRouter([
     },
     {
         path: '/login',
-        Component: Login
+        Component: AuthContainer
     },
     {
         path: '/signup',
-        Component: Signup
+        Component: AuthContainer
     }
 ])
 
