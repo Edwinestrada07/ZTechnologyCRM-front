@@ -11,16 +11,22 @@ function AuthContainer() {
     };
 
     return (
-        <div className="relative w-full h-screen flex items-center justify-center bg-gray-200">
+        <div className="relative flex items-center justify-center bg-white">
             <div className="relative w-full h-screen flex items-center justify-center">
                 {/* Imagen a la izquierda */}
-                <div className="hidden md:block w-full bg-cover bg-center" style={{ backgroundImage: 'url("/your-image-path.jpg")' }}></div>
+                <div className="hidden md:block w-full bg-cover bg-center">
+                    <img
+                        src="./assets/png/Business.png"
+                        alt="Business"
+                        className="scale-90 mt-22"
+                    />
+                </div>
                 <div className={`relative w-full h-full card-container ${isFlipped ? 'is-flipped' : ''}`}>
                     <div className="card-front">
-                        <Signup toggleForm={toggleForm} />
+                        <Login toggleForm={toggleForm} />
                     </div>
                     <div className="card-back">
-                        <Login toggleForm={toggleForm} />
+                        <Signup toggleForm={toggleForm} />
                     </div>
                 </div>
             </div>

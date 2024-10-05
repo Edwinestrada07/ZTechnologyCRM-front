@@ -3,7 +3,7 @@ import React from 'react'
 const Home = () => {
 
     return (
-        <div className="container-fluid text-white vh-90 p-5">
+        <div className="container-fluid text-dark vh-90 p-5">
         
             <h1 className="text-center mb-3 font-weight-normal">Bienvenido a Gestor de Productos y Clientes</h1>
             <p className="text-center"><strong>Explora y descubre cosas interesantes</strong></p>

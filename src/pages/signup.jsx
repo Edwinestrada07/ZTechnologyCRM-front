@@ -17,7 +17,7 @@ function Signup({ toggleForm }) {
         event.preventDefault();
 
         if (!signup.name || !signup.email || !signup.password) {
-            setErrorMessage('Por favor, complete todos los campos.');
+            setErrorMessage('Complete todos los campos.');
             return;
         }
 
@@ -48,7 +48,7 @@ function Signup({ toggleForm }) {
 
     return (
         <>
-            <section className="bg-gray-50 dark:bg-gray-900">
+            <section className="">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 
                     {successMessage && (
@@ -72,14 +72,14 @@ function Signup({ toggleForm }) {
                         </div>
                     )}
                     
-                    <div className="w-full bg-gray-300 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="w-full bg-gray-300 rounded-3xl shadow-lg dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                Registrarse
+                                Sign up to create an account
                             </h1>
                             <form onSubmit={submit} className="space-y-4 md:space-y-6" action="#">
                                 <div>
-                                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
                                     <input
                                         type="text" 
                                         name="name" 
@@ -114,17 +114,17 @@ function Signup({ toggleForm }) {
                                         onChange={onChangeData}
                                     />
                                 </div>
-                                <select id="role" onChange={onChangeData} className="w-full p-2 border border-gray-300 rounded">
-                                    <option value="">Seleccione el rol</option>
-                                    <option value="GESTOR">Gestor</option>
-                                    <option value="ADMIN">Administrador</option>
+                                <select id="role" onChange={onChangeData} className="border-1 mb-2 block h-12 w-full rounded-md border-slate-800 border-transparent bg-[linear-gradient(#000,#000),linear-gradient(to_right,#334454,#334454)]	bg-origin-border px-3 py-2 text-slate-200 transition-all duration-500 [background-clip:padding-box,_border-box] placeholder:text-slate-500 focus:bg-[linear-gradient(#000,#000),linear-gradient(to_right,#c7d2fe,#8678f9)] focus:outline-none">
+                                    <option className="bg-gray-800 text-white-50" value="">Select a role</option>
+                                    <option className="bg-gray-800 text-white-50" value="GESTOR">Gestor</option>
+                                    <option className="bg-gray-800 text-white-50" value="ADMIN">Administrador</option>
                                 </select>
-                                <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign up</button>
+                                <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg border-3 text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign up</button>
                                 
                             </form>
-                            <button to="/login" className="mt-4 text-blue-500" onClick={toggleForm}>
-                                ¿Ya tienes una cuenta? Inicia sesión aquí
-                            </button>
+                            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                                Do you already have an account? <a href="#" onClick={toggleForm} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</a>
+                            </p>
                         </div>
                     </div>
                 </div>
