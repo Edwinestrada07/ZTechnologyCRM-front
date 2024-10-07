@@ -1,69 +1,94 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from 'react-router-dom'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import MagicCard from '../components/magicCard';
+import Testimonial from '../components/testimonial';
+
 
 const Home = () => {
+    const navigate = useNavigate();
 
     return (
-        <div className="container-fluid text-dark vh-90 p-5">
-        
-            <h1 className="text-center mb-3 font-weight-normal">Bienvenido a Gestor de Productos y Clientes</h1>
-            <p className="text-center"><strong>Explora y descubre cosas interesantes</strong></p>
-
-            <h4 className="text-a">Funcionalidades:</h4>
-            <ul className="text-ul">
-                <li>Agregar nuevos usuarios y productos con información detallada.</li>
-                <li>Editar y actualizar información de los usuarios y productos existentes.</li>
-                <li>Organizar el inventario de productos y lleva un control de estos.</li>
-                <li>Eliminar perfiles de usuarios que ya no son necesarios.</li>
-                <li>Interfaz intuitiva y fácil de usar.</li>
-            </ul>
-
-            <div className="card text-white m-3"></div>
-
-            <div className="row justify-content-center">
-
-                <div className="col-lg-4 col-md-6 mb-4">
-                    <div className="card  bg-opacity-25">
-                        <div className="card-body">
-                            <h5 className="card-title font-weight-normal"><strong>Gestión de Clientes</strong></h5>
-                            <p className="card-text p-3 font-monospace">
-                                Registro de nuevos clientes con información detallada.
-                                Visualización y edición de perfiles de clientes.
-                                Seguimiento de interacciones y actividades con los clientes.
-                            </p>
-                            <a href="/client" className="btn btn-primary d-block mx-auto">Registrar Cliente</a>
-                        </div>
+        <section>
+            <div className="custom-screen py-28 text-gray-600">
+                <div className="space-y-5 max-w-4xl mx-auto text-center">
+                    <h1 className="text-4xl text-gray-800 font-extrabold mx-auto sm:text-6xl">
+                        Optimiza tu gestión de inventario y relaciones con clientes.
+                    </h1>
+                    <p className="max-w-xl mx-auto">
+                        La aplicación está diseñada para facilitar la operación diaria de un negocio, ayudando a los dueños o administradores a gestionar productos y clientes de manera eficiente.
+                    </p>
+                    <div className="flex items-center justify-center gap-x-3 font-medium text-sm">
+                        <button
+                            className="py-3 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow"
+                            onClick={() => navigate('/product')}
+                        >
+                            Empezar a construir
+                        </button>
+                        <a
+                            href="#learn-more"
+                            className="px-4 py-2 text-indigo-600 font-medium bg-indigo-50 rounded-full inline-flex items-center"
+                        >
+                            <strong className="mx-2">Leer más</strong>
+                            <FontAwesomeIcon icon={faArrowRight} />
+                        </a>
                     </div>
                 </div>
-
-                <div className="col-lg-4 col-md-6 mb-4">
-                    <div className="card  bg-opacity-25">
-                        <div className="card-body">
-                            <h5 className="card-title font-weight-normal"><strong>Gestión de Productos</strong></h5>
-                            <p className="card-text p-3 font-monospace">
-                                Registro de nuevos productos con información detallada.
-                                Visualización y edición de productos. Lleva un control de todos los productos que se tienen en la tienda
-                                Seguimiento de interacciones y actividades con los clientes.
-                            </p>
-                            <a href="/product" className="btn btn-primary d-block mx-auto">Registrar Productos</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-lg-4 col-md-6 mb-4">
-                    <div className="card  bg-opacity-25">
-                        <div className="card-body">
-                            <h5 className="card-title font-weight-normal"><strong>Seguimiento de Ventas</strong></h5>
-                            <p className="card-text p-3 font-monospace">
-                                Visualización del embudo de ventas para evaluar el progreso.
-                                Generación de informes de ventas y rendimiento.
-                            </p>
-                            <a href="/quote" className="btn btn-primary d-block mx-auto">Visualiza Cotizaciones</a>
-                        </div>
-                    </div>
-                </div>
-  
             </div>
-        </div>
+
+            <div  id="learn-more" className="bg-gray-800">
+                <div className="items-center gap-x-5 lg:flex">
+                    <div className="flex-1 sm:hidden lg:block">
+                        <img
+                            src="./assets/jpg/negocio.jpg"
+                            alt="Negocio"
+                            className="scale-90 rounded-2xl"
+                        />
+                    </div>
+                    <div className="max-w-xl md:mt-0 lg:max-w-2xl my-5 mr-5">
+                        <h2 className="text-gray-100 text-3xl font-semibold sm:text-4xl">
+                            La integración de todas las funciones en una única plataforma
+                        </h2>
+                        <p className="my-3 text-gray-400">
+                            "Gestor de Productos y Clientes" es una aplicación diseñada para empresas de cualquier tamaño que necesitan una forma sencilla, eficiente y organizada de gestionar sus productos, clientes y ventas. Con una interfaz intuitiva, la aplicación permite a los usuarios controlar todos los aspectos del inventario, mantener actualizados los datos de sus clientes, y hacer un seguimiento preciso del rendimiento de las ventas. Este sistema centralizado ahorra tiempo, reduce errores y mejora la toma de decisiones.
+                        </p>
+                        <button
+                            className="py-3 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow"
+                            onClick={() => navigate('/product')}
+                        >
+                            Empezar a construir
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div className="">
+                <div className="max-w-2xl sm:text-center md:mx-auto">
+                    <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+                        See what others saying about us
+                    </h2>
+                    <p className="mt-3 text-gray-600">
+                        Listen to what the experts around the world are saying about us.
+                    </p>
+                </div>
+                <MagicCard />        
+           </div>
+        
+            <div id="testimonials" className="max-w-screen-xl mx-auto px-4 md:px-8">
+                <div className="max-w-2xl sm:text-center md:mx-auto">
+                    <h2 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+                        See what others saying about us
+                    </h2>
+                    <p className="mt-3 text-gray-600">
+                        Listen to what the experts around the world are saying about us.
+                    </p>
+                </div>
+                <div className="mt-12">
+                    <Testimonial />
+                </div>
+            </div>
+        </section> 
     )
 }
 
