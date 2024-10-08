@@ -26,12 +26,12 @@ function Navbar() {
         <nav className="bg-gray-800 w-full border-b md:border-0 md:static">
             <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                    <a href="javascript:void(0)">
+                    <a href="/">
                         <img
-                            src="https://www.floatui.com/logo.svg" 
-                            width={120} 
-                            height={50}
-                            alt="Float UI logo"
+                            src="./assets/png/logo_nav.png" 
+                            width={250} 
+                            height={100}
+                            alt="logo_CMR"
                         />
                     </a>
                     <div className="md:hidden">
