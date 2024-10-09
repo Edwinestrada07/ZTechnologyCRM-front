@@ -71,7 +71,7 @@ function Navbar() {
                         <strong>Perfil</strong>
                     </NavLink> 
                     <button
-                        className="mb-2 py-2 px-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow"
+                        className="mb-2 py-2 px-2 text-white bg-cyan-500 hover:bg-cyan-600 rounded-md shadow"
                         onClick={ logout }
                     >
                         Cerrar Sesión

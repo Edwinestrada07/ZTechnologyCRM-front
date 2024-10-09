@@ -119,7 +119,7 @@ const ProductsPage = () => {
     }
 
     return (
-        <div className="container">
+        <div id="product" className="container">
             <div className="text-white p-5">
                 <h2 className="text-center font-weight-normal"><strong>Página de Productos</strong></h2>
 

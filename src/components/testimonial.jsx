@@ -62,29 +62,29 @@ const Testimonial = () => {
                 >
                     {/* Duplicamos los items del Marquee para que se repitan */}
                     {[0, 1].map((index) => (
-                        <div className="flex flex-1 gap-4" key={index}>
+                        <div className="flex flex-1 gap-2" key={index}>
                             {marqueeItems.map((item, idx) => (
                                 <div className="flex-1" key={idx}>
-                                    <div className="h-full max-w-xs rounded-xl bg-gray-200 dark:bg-gray-800 p-4 shadow-md">
+                                    <div className="h-full max-w-xs rounded-xl bg-gray-200 dark:bg-gray-800 p-3 shadow-md">
                                         {/* Imagen del avatar */}
                                         <div className="flex items-center gap-2">
                                             <img
                                                 src={item.avatar}
                                                 alt={`${item.name} avatar`}
-                                                className="w-12 h-12 rounded-full object-cover"
+                                                className="w-10 h-10 rounded-full object-cover"
                                             />
                                             <div>
-                                                <p className="text-md font-semibold text-gray-700 dark:text-gray-200">
+                                                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
                                                     {item.name}
                                                 </p>
-                                                <p className="text-sm text-gray-500 dark:text-gray-400">
+                                                <p className="text-xs text-gray-500 dark:text-gray-400">
                                                     {item.title}
                                                 </p>
                                             </div>
                                         </div>
 
                                         {/* Cita o testimonio */}
-                                        <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
+                                        <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">
                                             "{item.quote}"
                                         </p>
                                     </div>
