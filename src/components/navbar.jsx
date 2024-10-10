@@ -1,26 +1,41 @@
-import { faSliders } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { faSliders } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Navbar() {
-    const navigate = useNavigate()
-    const [state, setState] = useState(false)
-    
+    const navigate = useNavigate();
+    const [state, setState] = useState(false); // Para manejar el menú responsivo
+    const [loggedIn, setLoggedIn] = useState(false); // Estado para verificar autenticación
+    const [showDashboard, setShowDashboard] = useState(false); // Controla el desplegado del Dashboard
+
+    useEffect(() => {
+        // Verificar si el token está presente
+        const token = localStorage.getItem('token');
+        if (token) {
+            setLoggedIn(true);
+        }
+    }, []);
+
     const navigation = [
         { title: "Inicio", path: "/" },
+        { information: "Información", path: "#information" },
+        { testim: "Testimonios", path: "#testim" }
+    ];
+
+    const dashboardItems = [
         { title: "Productos", path: "/product" },
         { title: "Usuarios", path: "/user" },
         { title: "Clientes", path: "/client" },
-        { title: "Cotizaciones", path: "/quote"}
-    ]
+        { title: "Cotizaciones", path: "/quote" }
+    ];
 
     const logout = () => {
-        localStorage.removeItem('token')
-        localStorage.removeItem('role')
-
-        navigate('/login')
-    }
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        setLoggedIn(false); // Cambiar estado de autenticación
+        navigate('/login');
+    };
 
     return (
         <nav className="bg-gray-800 w-full border-b md:border-0 md:static">
@@ -36,50 +51,79 @@ function Navbar() {
                     </a>
                     <div className="md:hidden">
                         <button className="text-gray-200 text-2xl p-2.5"
-                            onClick={() => setState(!state)}
-                        >
-                            {
-                                state ? (
-                                    <FontAwesomeIcon icon={faSliders} />
-                                ) : (
-                                    <FontAwesomeIcon icon={faSliders} />
-                                )
-                                }
-                      </button>
+                            onClick={() => setState(!state)}>
+                            <FontAwesomeIcon icon={faSliders} />
+                        </button>
                     </div>
                 </div>
+                
                 <div className={`flex-1 justify-self-center mt-8 md:block md:pb-0 md:mt-0 ${ state ? 'block' : 'hidden'}`}>
                     <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                        {
-                            navigation.map((item, idx) => {
-                                return (
-                                    <li key={idx} className="text-gray-200 text-lg">
-                                        <a href={item.path}>
-                                            { item.title }
-                                        </a>
-                                    </li>
-                                )
-                            })
-                        }
+                        {navigation.map((item, idx) => (
+                            <li key={idx} className="text-gray-200 text-lg">
+                                <a href={item.path}>
+                                    { item.title }
+                                </a>
+                                <a href={item.path}>
+                                    { item.information }
+                                </a>
+                                <a href={item.path}>
+                                    { item.testim }
+                                </a>
+                            </li>
+                        ))}
+
+                        {/* Dashboard Option */}
+                        {loggedIn && (
+                            <li className="text-gray-200 text-lg">
+                                <button onClick={() => setShowDashboard(!showDashboard)}>
+                                    Dashboard
+                                </button>
+                                {/* Sub-navbar for Dashboard Items */}
+                                {showDashboard && (
+                                    <ul className="absolute mt-2 p-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black">
+                                        {dashboardItems.map((item, idx) => (
+                                            <li key={idx} className="text-gray-400">
+                                                <NavLink to={item.path}>
+                                                    {item.title}
+                                                </NavLink>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        )}
+
+                        {/* Show login required message */}
+                        {!loggedIn && (
+                            <li className="text-gray-400 text-lg">
+                                Se requieren credenciales de inicio de sesión para estas funciones
+                            </li>
+                        )}
                     </ul>
                 </div>
+                
                 <div className="text-white space-x-5">
-                    <NavLink 
-                        className={ ({isActive}) => `${ isActive ? 'active':'' }` }
-                        to="/profile"
-                    >
-                        <strong>Perfil</strong>
-                    </NavLink> 
-                    <button
-                        className="mb-2 py-2 px-2 text-white bg-cyan-500 hover:bg-cyan-600 rounded-md shadow"
-                        onClick={ logout }
-                    >
-                        Cerrar Sesión
-                    </button>
+                    {loggedIn ? (
+                        <>
+                            <NavLink className={({ isActive }) => `${ isActive ? 'active' : '' }`} to="/profile">
+                                <strong>Perfil</strong>
+                            </NavLink> 
+                            <button
+                                className="mb-2 py-2 px-2 text-white bg-cyan-500 hover:bg-cyan-600 rounded-md shadow"
+                                onClick={logout}>
+                                Cerrar Sesión
+                            </button>
+                        </>
+                    ) : (
+                        <NavLink to="/login" className="text-gray-200">
+                            Iniciar Sesión
+                        </NavLink>
+                    )}
                 </div>
             </div>
         </nav>
-    )
+    );
 }
 
-export default Navbar 
+export default Navbar;

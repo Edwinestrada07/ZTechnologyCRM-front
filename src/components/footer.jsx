@@ -4,10 +4,8 @@ const Footer = () => {
 
     const footerNavs = [
         { title: "Inicio", path: "/" },
-        { title: "Productos", path: "/product" },
-        { title: "Usuarios", path: "/user" },
-        { title: "Clientes", path: "/client" },
-        { title: "Cotizaciones", path: "/quote" },
+        { information: "Información", path: "#information" },
+        { testim: "Testimonios", path: "#testim" }
     ]
 
     const socialInfo = [
@@ -37,6 +35,8 @@ const Footer = () => {
                         {footerNavs.map((item, idx) => (
                             <li key={idx} className="hover:text-gray-800">
                                 <a href={item.path}>{item.title}</a>
+                                <a href={item.path}>{item.information}</a>
+                                <a href={item.path}>{item.testim}</a>
                             </li>
                         ))}
                     </ul>

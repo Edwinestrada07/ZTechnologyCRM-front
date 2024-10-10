@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, redirect } from "react-router-dom"
 import MainLayout from "./layouts/mainLayout"
 
 import Home from "./pages/home"
@@ -8,6 +8,14 @@ import Client from "./pages/client"
 import Quote from "./pages/quote"
 import Profile from "./pages/profile"
 import AuthContainer from "./AuthContainer"
+
+// Define la función loader para las rutas protegidas
+const loaderProtected = async () => {
+    if (!localStorage.getItem('token')) {
+        return redirect('/login');
+    }
+    return null;
+};
 
 const router = createBrowserRouter([ 
     {
@@ -20,19 +28,23 @@ const router = createBrowserRouter([
             },
             {
                 path: '/client',
-                Component: Client
+                Component: Client,
+                loader: loaderProtected,
             },
             {
                 path: '/user',
-                Component: User
+                Component: User,
+                loader: loaderProtected,
             },
             {
                 path: '/product',
-                Component: Product
+                Component: Product,
+                loader: loaderProtected,
             },
             {
                 path: '/quote',
-                Component: Quote
+                Component: Quote,
+                loader: loaderProtected,
             },
             {
                 path: '/Profile',

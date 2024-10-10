@@ -47,6 +47,7 @@ const Testimonial = () => {
 
             {/* Contenedor del Marquee con gradiente para suavizar los bordes */}
             <div
+                id="testim"
                 className="mb-4 w-full overflow-hidden"
                 style={{
                     maskImage:
