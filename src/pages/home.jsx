@@ -1,15 +1,22 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import MagicCard from '../components/magicCard';
-import Testimonial from '../components/testimonial';
-import Features from '../components/features';
-import CTA from '../components/CTA';
 
+import Features from '../components/features';
+import MagicCard from '../components/magicCard';
+import CTA from '../components/CTA';
+import Testimonial from '../components/testimonial';
 
 const Home = () => {
     const navigate = useNavigate();
+
+    // Redirecciona al usuario a la página de inicio si no está autenticado
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            navigate('/home');
+        }
+    }, [navigate]);
 
     return (
         <section>
@@ -25,7 +32,7 @@ const Home = () => {
                     <div className="flex items-center justify-center gap-x-3 font-medium text-sm">
                         <button
                             className="py-3 px-3 text-white bg-cyan-500 hover:bg-cyan-600 rounded-md shadow"
-                            onClick={() => navigate('/product')}
+                            onClick={() => navigate('/login')}
                         >
                             Empezar a construir
                         </button>
@@ -53,20 +60,10 @@ const Home = () => {
            </div>
         
             <div className="max-w-screen-xl mx-auto px-4 md:px-8">
-                <div className="max-w-2xl sm:text-center md:mx-auto">
-                    <h2 className="text-gray-800 text-3xl font-extrabold sm:text-4xl mt-16">
-                        Vea lo que otros dicen sobre nosotros
-                    </h2>
-                    <p className="mt-3 text-gray-600">
-                        Escuche lo que los expertos de todo el mundo dicen sobre nosotros.
-                    </p>
-                </div>
-                <div className="mt-12">
-                    <Testimonial />
-                </div>
+                <Testimonial />
             </div>
         </section> 
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

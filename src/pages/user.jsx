@@ -126,8 +126,10 @@ const UserPage = () => {
         <>
             <div className="container">
                 <div className="text-white p-5">
-                    <h2 className="text-center font-weight-normal"><strong>Página de Usuarios</strong></h2>
-
+                    <h2 className="text-gray-800 text-center text-3xl my-3 font-extrabold sm:text-4xl"><strong>Página de Usuarios</strong></h2>
+                    <p className="text-gray-600 my-2">
+                        A continuación el formulario para el ingreso de Usuarios, tenga presente que el rol de Admin tiene la función de actualizar los demás perfiles.
+                    </p>
                     <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} isCreating={!isEditUser} disabled={isManager} />
                     <UserList users={users} getUser={getUser} deleteUser={deleteUser} disabled={isManager} />
                 </div>

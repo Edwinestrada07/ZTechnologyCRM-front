@@ -121,8 +121,10 @@ const ProductsPage = () => {
     return (
         <div id="product" className="container">
             <div className="text-white p-5">
-                <h2 className="text-center font-weight-normal"><strong>Página de Productos</strong></h2>
-
+                <h2 className="text-gray-800 text-center text-3xl my-3 font-extrabold sm:text-4xl"><strong>Página de Productos</strong></h2>
+                <p className="text-gray-600 my-2">
+                    A continuación el formulario para el ingreso de los Productos.
+                </p>
                 <FormProduct product={product} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} />
                 <ProductList products={products} getProduct={getProduct} deleteProduct={deleteProduct} />
             </div>

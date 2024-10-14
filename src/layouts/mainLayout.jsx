@@ -8,7 +8,7 @@ function MainLayout() {
 
     useEffect(() => {
         if(!localStorage.getItem('token')) {
-            navigate('/login')
+            navigate('/')
         }
     }, [navigate])  
 

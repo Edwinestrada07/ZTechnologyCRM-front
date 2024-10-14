@@ -46,6 +46,14 @@ const Testimonial = () => {
             </style>
 
             {/* Contenedor del Marquee con gradiente para suavizar los bordes */}
+            <div className="max-w-2xl sm:text-center md:mx-auto">
+                    <h2 className="text-gray-800 text-3xl font-extrabold sm:text-4xl mt-16">
+                        Vea lo que otros dicen sobre nosotros
+                    </h2>
+                    <p className="my-3 text-gray-600">
+                        Escuche lo que los expertos de todo el mundo dicen sobre nosotros.
+                    </p>
+                </div>
             <div
                 id="testim"
                 className="mb-4 w-full overflow-hidden"

@@ -34,7 +34,7 @@ function Navbar() {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
         setLoggedIn(false); // Cambiar estado de autenticación
-        navigate('/login');
+        navigate('/');
     };
 
     return (
@@ -97,7 +97,7 @@ function Navbar() {
                         {/* Show login required message */}
                         {!loggedIn && (
                             <li className="text-gray-400 text-lg">
-                                Se requieren credenciales de inicio de sesión para estas funciones
+                                Dashboard
                             </li>
                         )}
                     </ul>
@@ -116,14 +116,17 @@ function Navbar() {
                             </button>
                         </>
                     ) : (
-                        <NavLink to="/login" className="text-gray-200">
+                        <button
+                            to="/login"
+                            onClick={() => navigate('/login')}
+                            className="mb-2 py-2 px-2 text-white bg-cyan-500 hover:bg-cyan-600 rounded-md shadow">
                             Iniciar Sesión
-                        </NavLink>
+                        </button>
                     )}
                 </div>
             </div>
         </nav>
     );
-}
+};
 
 export default Navbar;

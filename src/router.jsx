@@ -48,7 +48,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/Profile',
-                Component: Profile
+                Component: Profile,
+                loader: loaderProtected,
             }
         ]
     },

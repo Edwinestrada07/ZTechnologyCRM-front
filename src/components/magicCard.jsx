@@ -50,30 +50,30 @@ const MagicCard = memo(({ title, description, hoverDescription, imageUrl, zIndex
     );
 });
 
-// Datos para las tarjetas
+// Datos para las tarjetas en la página principal
 const cardsData = [
     {
         title: "Gestión de Usuarios",
         description: "La aplicación permite agregar, modificar y eliminar perfiles de usuarios.",
-        hoverDescription: "Cada perfil puede contener información relevante como nombre, rol en la empresa y nivel de acceso...",
+        hoverDescription: "Cada perfil puede contener información relevante como nombre, rol en la empresa y nivel de acceso, garantizando que solo las personas autorizadas puedan gestionar ciertos aspectos del negocio.",
         imageUrl: "./assets/jpg/gestion_usuarios.jpg"
     },
     {
         title: "Gestión de Productos",
         description: "El núcleo de la aplicación se centra en ofrecer una administración de productos fácil y detallada.",
-        hoverDescription: "Cada producto puede registrarse con atributos personalizados como nombre, descripción, precio...",
+        hoverDescription: "Cada producto puede registrarse con atributos personalizados como nombre, descripción, precio, cantidad disponible, y otras características necesarias para la operación del negocio.",
         imageUrl: "./assets/jpg/gestion_product.jpg"
     },
     {
         title: "Gestión de Clientes",
         description: "La base de datos de clientes es uno de los activos más importantes para un negocio.",
-        hoverDescription: "Permite registrar nuevos clientes y almacenar detalles esenciales como información de contacto...",
+        hoverDescription: " Esta funcionalidad permite registrar nuevos clientes y almacenar detalles esenciales como información de contacto, historial de compras y preferencias personales, facilitando un enfoque personalizado y orientado a mejorar las relaciones comerciales.",
         imageUrl: "./assets/jpg/gestion_cliente.jpg"
     },
     {
         title: "Seguimiento de Ventas",
         description: "Esta funcionalidad ofrece una visión clara y concisa del rendimiento de las ventas a lo largo del tiempo.",
-        hoverDescription: "Permite monitorear el progreso de cada transacción, identificar cuellos de botella en el proceso de ventas...",
+        hoverDescription: "Permite monitorear el progreso de cada transacción, identificar cuellos de botella en el proceso de ventas y generar informes para analizar el comportamiento de los clientes y la eficacia de las estrategias de ventas.",
         imageUrl: "./assets/jpg/seguimien_venta.jpg"
     },
 ];
@@ -104,4 +104,4 @@ export default function HomePage() {
             </div>
         </div>
     );
-}
+};

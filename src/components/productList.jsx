@@ -4,33 +4,33 @@ const ProductList = ({ products, deleteProduct, getProduct }) => {
     return (
         <>
             {products.length > 0 ? (
-                <div className="table-responsive mt-4">
-                    <table className="table table-striped table-hover">
-                        <thead className="thead-dark">
+                <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+                    <table className="w-full table-auto text-sm text-left">
+                        <thead className="bg-gray-100 text-gray-600 font-medium border-b">
                             <tr>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>Descripción</th>
-                                <th>Acciones</th>
+                                <th className="py-3 px-6">Nombre</th>
+                                <th className="py-3 px-6">Precio</th>
+                                <th className="py-3 px-6">Cantidad</th>
+                                <th className="py-3 px-6">Descripción</th>
+                                <th className="py-3 px-6"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-gray-600 divide-y">
                             {products.map((product) => (
                                 <tr key={product.id}>
-                                    <td>{product.title}</td>
-                                    <td>$ {product.price}</td>
-                                    <td>{product.stock}</td>
-                                    <td>{product.description}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{product.title}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">$ {product.price}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{product.stock}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{product.description}</td>
                                     <td>
                                         <button 
-                                            className="btn btn-primary mr-3" 
+                                            className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg" 
                                             onClick={() => deleteProduct(product.id)}
                                           >
                                             Eliminar
                                         </button>
                                         <button 
-                                            className="btn btn-primary" 
+                                            className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg" 
                                             onClick={() => getProduct(product.id)}
                                           >
                                             Actualizar
