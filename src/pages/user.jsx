@@ -1,6 +1,6 @@
-import UserList from '../components/userList'
-import FormUser from '../components/formUser'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import FormUser from '../components/formUser';
+import TableUsers from '../components/tableUsers';
 
 const UserPage = () => {
     const [users, setUsers] = useState([])
@@ -131,11 +131,11 @@ const UserPage = () => {
                         A continuación el formulario para el ingreso de Usuarios, tenga presente que el rol de Admin tiene la función de actualizar los demás perfiles.
                     </p>
                     <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} isCreating={!isEditUser} disabled={isManager} />
-                    <UserList users={users} getUser={getUser} deleteUser={deleteUser} disabled={isManager} />
+                    <TableUsers users={users} getUser={getUser} deleteUser={deleteUser} disabled={isManager} />
                 </div>
             </div>
         </>
     )
 }
 
-export default UserPage
+export default UserPage;

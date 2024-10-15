@@ -1,90 +1,71 @@
-import { useContext, useState } from 'react'
-import { ClientContext } from '../contexts/clients.context'
+import React from 'react'
 
-function FormClient() {
-    const [client, setClient] = useState({})
-    const { state, dispatch } = useContext(ClientContext)
-
-    const onChangeData = (event) => {
-        setClient({
-            ...client,
-            [event.target.id]: event.target.value
-        })
-    }
+function FormClient(props) {
 
     const submit = async (event) => {
         event.preventDefault()
-        dispatch({ type: 'loading' })
-        
-        try {
-            await new Promise(resolve => setTimeout(resolve, 500)) // Simula el tiempo de espera
-    
-            const response = await fetch('http://localhost:4000/client', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: localStorage.getItem('token')
-                },
-                body: JSON.stringify(client)
-            })
-    
-            const responseData = await response.json()
-            dispatch({ type: 'createClient', client: responseData.client })
-            
-        } catch (error) {
-            console.error('Error al enviar datos:', error);
-            dispatch({ type: 'error', error: 'Error al enviar datos' });
-        }
+        props.onSubmit()
     }
 
-    if(state.status === 'loading') 
-        return 'loading...'
-
     return (
-        <form onSubmit={submit} className="d-flex flex-wrap align-items-center">
-            <div className="form-group m-2 flex-grow-1">
+        <form onSubmit={ submit } className="text-gray-600 d-flex flex-wrap align-items-center">
+            <div className="m-2 flex-grow-1">
                 <input
                     type="text"
-                    className="form-control"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     placeholder="Nombre"
                     name="name"
                     id="name"
-                    onChange={ onChangeData }
+                    value={ props.client.name ||  '' }
+                    onChange={ props.onChangeData }
                 />
             </div>
-            <div className="form-group m-2 flex-grow-1">
+            <div className="m-2 flex-grow-1">
                 <input
                     type="email"
-                    className="form-control"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     placeholder="Correo"
                     name="email"
                     id="email"
-                    onChange={ onChangeData }
+                    value={ props.client.email || '' }
+                    onChange={ props.onChangeData }
                 />
             </div>
-            <div className="form-group m-2 flex-grow-1">
+            <div className="m-2 flex-grow-1">
                 <input
                     type="text"
-                    className="form-control"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     placeholder="Dirección"
                     name="address"
                     id="address"
-                    onChange={ onChangeData }
+                    value={ props.client.address || '' }
+                    onChange={ props.onChangeData }
                 />
             </div>
-            <div className="form-group m-2 flex-grow-1">
+            <div className="m-2 flex-grow-1">
                 <input
                     type="number"
-                    className="form-control"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     placeholder="Celular/Teléfono"
                     name="phone"
                     id="phone"
-                    onChange={ onChangeData }
+                    value={ props.client.phone || '' }
+                    onChange={ props.onChangeData }
                 />
             </div>
-            <div className="form-group m-2">
-                <button className="btn btn-primary mr-2" type="submit">
+            <div className="m-2">
+                <button 
+                    className="mx-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md shadow-md transition duration-300"
+                    type="submit"
+                >
                     Guardar
+                </button>
+                <button 
+                    className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md shadow-md transition duration-300" 
+                    type="button" 
+                    onClick={ props.onClear }
+                >
+                    Limpiar
                 </button>
             </div>
         </form>

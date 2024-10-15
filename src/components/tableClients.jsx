@@ -1,66 +1,41 @@
-import { useState, useEffect } from 'react'
+import React from 'react'
 
-const TableClients = () => {
-    const [clients, setClients] = useState([])
-
-    const getClients = async () => {
-        try {
-            const response = await fetch('http://localhost:4000/client', {
-                method: 'GET',
-                headers: {
-                    authorization: localStorage.getItem('token')
-                }
-            });
-            const clients = await response.json()
-            setClients(clients);
-
-        } catch (error) {
-            console.log("error", error)
-        }
-    }
-
-    const deleteClient = async (id) => {
-        await fetch(`http://localhost:4000/client/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: localStorage.getItem('token')
-            }
-        });
-
-        getClients()
-    };
-
-    useEffect(() => {
-        getClients()
-    }, [])
-
+const TableClients = ({ clients, deleteClient, getClient }) => {
+    
     return (
         <>
             {clients.length > 0 ? (
-                <div className="table-responsive mt-4">
-                    <table className="table table-striped table-hover">
-                        <thead className="thead-dark">
+                <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+                    <table className="w-full table-auto text-sm text-left">
+                        <thead className="bg-gray-100 text-gray-600 font-medium border-b">
                             <tr>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Dirección</th>
-                                <th>Celular</th>
-                                <th>Actions</th>
+                                <th className="py-3 px-6">Nombre</th>
+                                <th className="py-3 px-6">Correo</th>
+                                <th className="py-3 px-6">Dirección</th>
+                                <th className="py-3 px-6">Celular</th>
+                                <th className="py-3 px-6"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-gray-600 divide-y">
                             {clients.map((client, i) => (
                                 <tr key={i}>
-                                    <td>{client.name}</td>
-                                    <td>{client.email}</td>
-                                    <td>{client.address}</td>
-                                    <td>{client.phone}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{client.name}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{client.email}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{client.address}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{client.phone}</td>
                                     <td>
                                         <button 
-                                            className="btn btn-primary" 
+                                            className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg" 
                                             onClick={() => deleteClient(client.id)}
                                           >
                                             Eliminar
+                                        </button>
+                                        <button 
+                                            className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg" 
+                                            onClick={() => getClient(client.id)}
+
+                                        >
+                                            Actualizar
                                         </button>
                                     </td>
                                 </tr>

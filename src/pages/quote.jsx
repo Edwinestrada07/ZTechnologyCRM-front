@@ -7,6 +7,7 @@ function Quote() {
     const [selectedProduct, setSelectedProduct] = useState('')
     const [quoteCreated, setQuoteCreated] = useState(false)
     const [quoteData, setQuoteData] = useState({
+        product: '',
         cant: '',
         price: '',
         description: '',
@@ -120,32 +121,34 @@ function Quote() {
     return (
         <div className="container">
             <div className="text-white p-5">
-                <h2 className="text-center font-weight-normal"><strong>Página de cotizaciones</strong></h2>
-
-                <form className="row g-3">
-                    <div className="col-md-6">
-                        <select id="clientSelect" className="form-select" onChange={handleClientChange}>
-                            <option value="">Seleccione un cliente</option>
+                <h2 className="text-gray-800 text-center text-3xl my-3 font-extrabold sm:text-4xl"><strong>Página de cotizaciones</strong></h2>
+                <p className="text-gray-600 my-2">
+                    A continuación el formulario para generar las cotizaciones.
+                </p>
+                <form className="text-gray-600 d-flex flex-wrap align-items-center">
+                    <div className="m-2 flex-grow-1">
+                        <select id="clientSelect" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" onChange={handleClientChange}>
+                            <option value="">Seleccione un Cliente</option>
                             {clients.map(client => (
                                 <option key={client.id} value={client.id}>{client.name}</option>
                             ))}
                         </select>
                     </div>
 
-                    <div className="col-md-6">
-                        <select id="productSelect" className="form-select" onChange={handleProductChange}>
-                            <option value="">Seleccione un producto</option>
+                    <div className="m-2 flex-grow-1">
+                        <select id="productSelect" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" onChange={handleProductChange}>
+                            <option value="">Seleccione un Producto</option>
                             {products.map(product => (
                                 <option key={product.id} value={product.id}>{product.title} -- (${product.price})</option>
                             ))}
                         </select>
                     </div>
 
-                    <div className="col-md-6">
+                    <div className="m-2 flex-grow-1">
                         <input 
                             type="number" 
-                            className="form-control"
-                            id="inputCant" 
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            id="Cant" 
                             placeholder="Cantidad"
                             name="cant" 
                             value={quoteData.cant} 
@@ -153,34 +156,23 @@ function Quote() {
                         />
                     </div>
 
-                    <div className="col-md-6">
+                    <div className="m-2 flex-grow-1">
                         <input 
                             type="number" 
-                            className="form-control"
-                            id="inputPrice" 
-                            placeholder="Precio"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            id="Price" 
+                            placeholder="PrecioXUnidad"
                             name="price" 
                             value={quoteData.price} 
                             onChange={handleInputChange} 
                         />
                     </div>
 
-                    <div className="col-12">
-                        <input 
-                            className="form-control"
-                            id="inputDescription" 
-                            placeholder="Descripción"
-                            name="description" 
-                            value={quoteData.description} 
-                            onChange={handleInputChange} 
-                        />
-                    </div>
-
-                    <div className="col-md-6">
+                    <div className="m-2 flex-grow-1">
                         <input 
                             type="number" 
-                            className="form-control"
-                            id="inputSubtotal" 
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            id="subtotal" 
                             placeholder="SubTotal"
                             name="subtotal" 
                             value={quoteData.subtotal} 
@@ -188,11 +180,11 @@ function Quote() {
                         />
                     </div>
 
-                    <div className="col-md-6">
+                    <div className="m-2 flex-grow-1">
                         <input 
                             type="number" 
-                            className="form-control"
-                            id="inputshippingPrice" 
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            id="shippingPrice" 
                             placeholder="Precio Envío"
                             name="shippingPrice" 
                             value={quoteData.shippingPrice} 
@@ -200,11 +192,11 @@ function Quote() {
                         />
                     </div>
 
-                    <div className="col-md-6">
+                    <div className="m-2 flex-grow-1">
                         <input 
                             type="number" 
-                            className="form-control"
-                            id="inputTotal" 
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            id="Total" 
                             placeholder="Total"
                             name="total" 
                             value={quoteData.total} 
@@ -212,9 +204,20 @@ function Quote() {
                         />
                     </div>
 
-                    <div className="col-12">
+                    <div className="m-2 flex-grow-1">
+                        <textarea 
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            id="description" 
+                            placeholder="Descripción"
+                            name="description" 
+                            value={quoteData.description} 
+                            onChange={handleInputChange} 
+                        />
+                    </div>
+
+                    <div className="m-2 flex-grow-1">
                         <button 
-                            className="btn btn-primary" 
+                            className="mx-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md shadow-md transition duration-300" 
                             onClick={createQuote}
                         >
                             Crear Cotización
@@ -230,21 +233,27 @@ function Quote() {
                     )}
                 </form>
 
-                <div className="row mt-3">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-2 py-3">
                     {/* Renderiza las tarjetas de cotización */}
                     {quoteList.map(quote => (
-                        <div key={quote.id} className="col-md-4 mb-3">
-                            <div className="card">
+                        <div key={quote.id} className="">
+                            <div className="bg-gray-100 text-gray-600 font-medium border-b">
                                 <div className="card-body">
-                                    <h5 className="card-title">Cotización #{quote.id}</h5>
-                                    <p className="card-text">Cantidad: {quote.cant}</p>
-                                    <p className="card-text">Precio: {quote.price}</p>
-                                    <p className="card-text">Descripción: {quote.description}</p>
-                                    <p className="card-text">Subtotal: {quote.subtotal}</p>
-                                    <p className="card-text">Precio Envío: {quote.shippingPrice}</p>
-                                    <p className="card-text">Total: {quote.total}</p>
-                                    <p className="card-text">Cliente: {clients.find(client => client.id === quote.clientId)?.name}</p>
-                                    <button className="btn btn-danger mr-2" onClick={() => deleteQuote(quote.id)}>Eliminar</button>
+                                    <h3 className="px-4 py-3 text-center whitespace-nowrap"><strong>Cotización #{quote.id}</strong></h3>
+                                    <p className="py-1 px-2">Productos: {quote.product}</p>
+                                    <p className="py-1 px-2">Cantidad: {quote.cant}</p>
+                                    <p className="py-1 px-2">PrecioXUnidad: {quote.price}</p>
+                                    <p className="py-1 px-2">Descripción: {quote.description}</p>
+                                    <p className="py-1 px-2">Subtotal: {quote.subtotal}</p>
+                                    <p className="py-1 px-2">Precio Envío: {quote.shippingPrice}</p>
+                                    <p className="py-1 px-2">Total: {quote.total}</p>
+                                    <p className="py-1 px-2">Cliente: {clients.find(client => client.id === quote.clientId)?.name}</p>
+                                    <button 
+                                        className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-200 rounded-lg" 
+                                        onClick={() => deleteQuote(quote.id)}
+                                    >
+                                        Eliminar
+                                    </button>
                                     {/* Agrega aquí la lógica para modificar la cotización */}
                                 </div>
                             </div>

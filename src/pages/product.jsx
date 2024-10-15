@@ -1,11 +1,11 @@
-import ProductList from '../components/productList'
-import FormProduct from '../components/formProduct'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import FormProduct from '../components/formProduct';
+import TableProducts from '../components/tableProducts';
 
-const ProductsPage = () => {
-    const [products, setProducts] = useState([])
-    const [product, setProduct] = useState({})
-    const [isEditProduct, setIsEditProduct] = useState(false)
+const ProductPage = () => {
+    const [products, setProducts] = useState([]);
+    const [product, setProduct] = useState({});
+    const [isEditProduct, setIsEditProduct] = useState(false);
 
     const getProducts = async () => {
         try {
@@ -16,11 +16,11 @@ const ProductsPage = () => {
                 }
             })
 
-            const products = await response.json()
-            setProducts(products)
+            const products = await response.json();
+            setProducts(products);
 
         } catch (error) {
-            console.error('error', error)
+            console.error('error', error);
         }
     }
 
@@ -126,10 +126,10 @@ const ProductsPage = () => {
                     A continuación el formulario para el ingreso de los Productos.
                 </p>
                 <FormProduct product={product} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} />
-                <ProductList products={products} getProduct={getProduct} deleteProduct={deleteProduct} />
+                <TableProducts products={products} getProduct={getProduct} deleteProduct={deleteProduct} />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ProductsPage
+export default ProductPage;
