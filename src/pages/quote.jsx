@@ -3,108 +3,82 @@ import FormQuote from '../components/formQuote';
 import TableQuote from '../components/tableQuote';
 
 const QuotePage = () => {
-    const [clients, setClients] = useState([]);
-    const [products, setProducts] = useState([]);
-    const [selectedClient, setSelectedClient] = useState('');
-    const [quoteCreated, setQuoteCreated] = useState(false);
-    const [isEditQuote, setIsEditQuote] = useState(false);
-    const [quoteData, setQuoteData] = useState({
-        clientId: '',
+    const [data, setData] = useState({
+        clients: [],
         products: [],
-        subtotal: 0,
-        shippingPrice: 0,
-        total: 0,
-        description: ''
+        quotes: [],
     });
-    const [quoteList, setQuoteList] = useState([]);
+    const [formState, setFormState] = useState({
+        selectedClient: '',
+        selectedProduct: '',
+        isEdit: false,
+        quoteData: {
+            product: '',
+            cant: '',
+            price: '',
+            description: '',
+            subtotal: '',
+            shippingPrice: '',
+            total: ''
+        }
+    });
+    const [quoteCreated, setQuoteCreated] = useState(false);
+
+    const fetchData = async () => {
+        try {
+            const [clientsData, productsData, quotesData] = await Promise.all([
+                fetch('http://localhost:4000/client', {
+                    headers: { authorization: localStorage.getItem('token') }
+                }).then(res => res.json()),
+                fetch('http://localhost:4000/product', {
+                    headers: { authorization: localStorage.getItem('token') }
+                }).then(res => res.json()),
+                fetch('http://localhost:4000/quote', {
+                    headers: { authorization: localStorage.getItem('token') }
+                }).then(res => res.json()),
+            ]);
+            setData({ clients: clientsData, products: productsData, quotes: quotesData });
+        } catch (error) {
+            console.error("Error al obtener datos:", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const clientsResponse = await fetch('http://localhost:4000/client', {
-                    method: 'GET',
-                    headers: {
-                        authorization: localStorage.getItem('token')
-                    }
-                });
-                const clientsData = await clientsResponse.json();
-                setClients(clientsData);
-
-                const productsResponse = await fetch('http://localhost:4000/product', {
-                    method: 'GET',
-                    headers: {
-                        authorization: localStorage.getItem('token')
-                    }
-                });
-                const productsData = await productsResponse.json();
-                setProducts(productsData);
-
-                const quotesResponse = await fetch('http://localhost:4000/quote', {
-                    method: 'GET',
-                    headers: {
-                        authorization: localStorage.getItem('token')
-                    }
-                });
-                const quotesData = await quotesResponse.json();
-                setQuoteList(quotesData);
-
-            } catch (error) {
-                console.error("Error al obtener datos:", error);
-            }
-        };
-
         fetchData();
     }, [quoteCreated]);
 
-    const createQuote = async () => {
+    const handleSubmit = async () => {
+        const url = formState.isEdit ? `http://localhost:4000/quote/${formState.quoteData.id}` : 'http://localhost:4000/quote';
+        const method = formState.isEdit ? 'PUT' : 'POST';
         try {
-            const response = await fetch('http://localhost:4000/quote', {
-                method: 'POST',
+            const response = await fetch(url, {
+                method,
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: localStorage.getItem('token')
                 },
-                body: JSON.stringify(quoteData)
+                body: JSON.stringify({
+                    clientId: formState.selectedClient,
+                    productId: formState.selectedProduct,
+                    ...formState.quoteData
+                })
             });
-
             if (response.ok) {
                 setQuoteCreated(!quoteCreated);
-                onClear();  // Limpiar el formulario después de crear
             } else {
-                console.error('No se pudo crear la cotización');
+                console.error('No se pudo procesar la cotización');
             }
         } catch (error) {
-            console.error('Error al crear cotización:', error);
+            console.error('Error al procesar cotización:', error);
         }
     };
 
-    const updateQuote = async (quote) => {
-        try {
-            const response = await fetch(`http://localhost:4000/quote/${quote.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: localStorage.getItem('token')
-                },
-                body: JSON.stringify(quote)
-            });
-            setQuoteCreated(!quoteCreated);
-            console.log('Cotización actualizada:', await response.json());
-
-        } catch (error) {
-            console.error('Error al actualizar cotización', error);
-        }
-    };
-
-    const deleteQuote = async (id) => {
+    const handleDelete = async (id) => {
         try {
             const response = await fetch(`http://localhost:4000/quote/${id}`, {
                 method: 'DELETE',
-                headers: {
-                    authorization: localStorage.getItem('token')
-                }
+                headers: { authorization: localStorage.getItem('token') }
             });
-
             if (response.ok) {
                 setQuoteCreated(!quoteCreated);
             } else {
@@ -115,54 +89,46 @@ const QuotePage = () => {
         }
     };
 
-    const onChangeData = (event) => {
+    const handleChange = (event) => {
         const { name, value } = event.target;
-        setQuoteData({
-            ...quoteData,
-            [name]: value
-        });
-    };
-
-    const addProductToQuote = (productData) => {
-        setQuoteData(prevData => ({
-            ...prevData,
-            products: [...prevData.products, productData],
-            subtotal: prevData.subtotal + productData.subtotal,
-            total: prevData.total + productData.total
-        }));
-    };
-
-    const onClear = () => {
-        setQuoteData({
-            clientId: '',
-            products: [],
-            subtotal: 0,
-            shippingPrice: 0,
-            total: 0,
-            description: ''
-        });
-        setIsEditQuote(false);
+        if (name === 'clientId' || name === 'productId') {
+            setFormState(prev => ({
+                ...prev,
+                [name === 'clientId' ? 'selectedClient' : 'selectedProduct']: value
+            }));
+        } else {
+            setFormState(prev => ({
+                ...prev,
+                quoteData: { ...prev.quoteData, [name]: value }
+            }));
+        }
     };
 
     return (
         <div className="container">
             <div className="text-white p-5">
-                <h2 className="text-gray-800 text-center text-3xl my-3 font-extrabold sm:text-4xl"><strong>Página de Cotizaciones</strong></h2>
-                <p className="text-gray-600 my-2">A continuación el formulario para generar las cotizaciones.</p>
-                <FormQuote 
-                    onSubmit={createQuote} 
-                    onChangeData={onChangeData} 
-                    addProductToQuote={addProductToQuote}
-                    quoteData={quoteData} 
-                    clients={clients} 
-                    products={products} 
-                    onClear={onClear} 
+                <h2 className="text-gray-800 text-center text-3xl my-3 font-extrabold sm:text-4xl">
+                    <strong>Página de Cotizaciones</strong>
+                </h2>
+                <p className="text-gray-600 my-2">Formulario para generar cotizaciones.</p>
+                <FormQuote
+                    onSubmit={handleSubmit}
+                    onChangeData={handleChange}
+                    onClear={() => setFormState({ selectedClient: '', selectedProduct: '', isEdit: false, quoteData: {} })}
+                    isCreating={!formState.isEdit}
+                    quoteData={formState.quoteData}
+                    clients={data.clients}
+                    products={data.products}
                 />
-                <TableQuote 
-                    clients={clients} 
-                    quoteList={quoteList} 
-                    updateQuote={updateQuote} 
-                    deleteQuote={deleteQuote} 
+                <TableQuote
+                    clients={data.clients}
+                    quoteList={data.quotes}
+                    deleteQuote={handleDelete}
+                    updateQuote={quoteId => setFormState({
+                        ...formState,
+                        isEdit: true,
+                        quoteData: data.quotes.find(quote => quote.id === quoteId)
+                    })}
                 />
             </div>
         </div>
