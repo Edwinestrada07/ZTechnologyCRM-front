@@ -125,8 +125,17 @@ const ProductPage = () => {
                 <p className="text-gray-600 my-2">
                     A continuación el formulario para el ingreso de los Productos.
                 </p>
-                <FormProduct product={product} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} />
-                <TableProducts products={products} getProduct={getProduct} deleteProduct={deleteProduct} />
+                <FormProduct 
+                    product={product} 
+                    onSubmit={onSubmit} 
+                    onChangeData={onChangeData} 
+                    onClear={onClear} 
+                />
+                <TableProducts 
+                    products={products} 
+                    getProduct={getProduct} 
+                    deleteProduct={deleteProduct} 
+                />
             </div>
         </div>
     );

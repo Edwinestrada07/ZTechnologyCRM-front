@@ -1,62 +1,47 @@
 import React, { useEffect, useState } from "react";
 
-function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, clients, products }) {
-    const initialProductData = {
+function FormQuote({ onSubmit, onChangeData, addProductToQuote, onClear, isCreating, quoteData, clients, products }) {
+    const [productData, setProductData] = useState({
         productId: '',
-        cant: 0,
-        price: 0,
+        cant: '',
+        price: '',
         subtotal: 0,
-        shippingPrice: 0,
+        shippingPrice: '',
         total: 0
-    };
-    
-    const [productData, setProductData] = useState(initialProductData);
+    })
 
     useEffect(() => {
-        const { cant, price, shippingPrice } = productData;
-        const subtotal = cant * price;
-        const total = subtotal + Number(shippingPrice);
-        setProductData(prevData => ({
+        const subtotal = productData.cant * productData.price;
+        const total = subtotal + Number(productData.shippingPrice);
+        setProductData((prevData) => ({
             ...prevData,
             subtotal,
             total
         }));
     }, [productData.cant, productData.price, productData.shippingPrice]);
 
-    const handleChange = (e) => {
+    const onProductChange = (e) => {
         const { name, value } = e.target;
-        const updatedValue = value ? Number(value) : 0;
-        setProductData(prevData => ({
-            ...prevData,
-            [name]: updatedValue
-        }));
-        onChangeData(e);
+        setProductData({
+            ...productData,
+            [name]: value
+        });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const { clientId } = quoteData;
-        const { productId, cant, price } = productData;
-
-        if (!clientId || !productId || cant <= 0 || price <= 0) {
-            alert("Por favor, complete todos los campos obligatorios.");
-            return;
-        }
-
-        const validQuoteData = {
-            ...quoteData,
-            cant: productData.cant,
-            price: productData.price,
-            shippingPrice: productData.shippingPrice,
-            subtotal: productData.subtotal,
-            total: productData.total
-        };
-
-        onSubmit(validQuoteData);
+    const addProduct = () => {
+        addProductToQuote({ ...productData });
+        setProductData({
+            productId: '',
+            cant: 0,
+            price: 0,
+            subtotal: 0,
+            shippingPrice: 0,
+            total: 0
+        });
     };
 
     return (
-        <form onSubmit={handleSubmit} className="text-gray-600 d-flex flex-wrap align-items-center">
+        <form onSubmit={onSubmit} className="text-gray-600 d-flex flex-wrap align-items-center">
             <div className="m-2 flex-grow-1">
                 <select
                     name="clientId"
@@ -77,13 +62,13 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                 <select
                     name="productId"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                    onChange={handleChange}
-                    value={productData.productId}
+                    onChange={onChangeData}
+                    value={quoteData.productId}
                 >
                     <option value="">Seleccione un Producto</option>
                     {products.map(product => (
                         <option key={product.id} value={product.id}>
-                            {product.title} -- (${product.price})
+                            {product.title} --// (${product.price})
                         </option>
                     ))}
                 </select>
@@ -96,7 +81,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                     placeholder="Cantidad" 
                     name="cant" 
                     value={productData.cant} 
-                    onChange={handleChange} 
+                    onChange={onProductChange} 
                 />
             </div>
 
@@ -107,7 +92,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                     placeholder="Precio por Unidad" 
                     name="price" 
                     value={productData.price} 
-                    onChange={handleChange} 
+                    onChange={onProductChange} 
                 />
             </div>
 
@@ -118,7 +103,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                     placeholder="Precio de Envío" 
                     name="shippingPrice" 
                     value={productData.shippingPrice} 
-                    onChange={handleChange} 
+                    onChange={onProductChange} 
                 />
             </div>
 
@@ -153,10 +138,24 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             </div>
 
             <div className="m-2 flex-grow-1">
-                <button className="mx-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md shadow-md transition duration-300" type="submit">
+                <button 
+                    className="mx-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md shadow-md transition duration-300" 
+                    type="submit"
+                >
                     {isCreating ? 'Crear Cotización' : 'Actualizar Cotización'}
                 </button>
-                <button className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md shadow-md transition duration-300" type="button" onClick={onClear}>
+                <button 
+                    type="button" 
+                    className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md" 
+                    onClick={addProduct}
+                >
+                    Agregar Producto
+                </button>
+                <button 
+                    className="px-4 py-2 ml-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md shadow-md transition duration-300" 
+                    type="button" 
+                    onClick={onClear}
+                >
                     Limpiar
                 </button>
             </div>

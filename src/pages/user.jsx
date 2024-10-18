@@ -130,8 +130,20 @@ const UserPage = () => {
                     <p className="text-gray-600 my-2">
                         A continuación el formulario para el ingreso de Usuarios, tenga presente que el rol de Admin tiene la función de actualizar los demás perfiles.
                     </p>
-                    <FormUser user={user} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} isCreating={!isEditUser} disabled={isManager} />
-                    <TableUsers users={users} getUser={getUser} deleteUser={deleteUser} disabled={isManager} />
+                    <FormUser 
+                        user={user} 
+                        onSubmit={onSubmit} 
+                        onChangeData={onChangeData} 
+                        onClear={onClear} 
+                        isCreating={!isEditUser} 
+                        disabled={isManager} 
+                    />
+                    <TableUsers 
+                        users={users} 
+                        getUser={getUser} 
+                        deleteUser={deleteUser} 
+                        disabled={isManager} 
+                    />
                 </div>
             </div>
         </>

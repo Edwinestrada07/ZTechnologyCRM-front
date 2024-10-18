@@ -125,8 +125,18 @@ const ClientPage = () => {
                     <p className="text-gray-600 my-2">
                         A continuación el formulario para el ingreso de Clientes.
                     </p>
-                    <FormClient client={client} onSubmit={onSubmit} onChangeData={onChangeData} onClear={onClear} isCreating={!isEditClient}/>
-                    <TableClients clients={clients} getClient={getClient} deleteClient={deleteClient}/>
+                    <FormClient 
+                        client={client} 
+                        onSubmit={onSubmit} 
+                        onChangeData={onChangeData} 
+                        onClear={onClear} 
+                        isCreating={!isEditClient}
+                    />
+                    <TableClients 
+                        clients={clients} 
+                        getClient={getClient} 
+                        deleteClient={deleteClient}
+                    />
                 </div>
             </div>
         </>
