@@ -123,7 +123,13 @@ function Signup({ toggleForm }) {
                                 
                             </form>
                             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Do you already have an account? <a href="#" onClick={toggleForm} class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</a>
+                                Do you already have an account? 
+                                <button href="#" 
+                                    onClick={toggleForm} 
+                                    class="font-medium m-2 text-primary-600 hover:underline dark:text-primary-500"
+                                >
+                                    Sign in
+                                </button>
                             </p>
                         </div>
                     </div>

@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, clients, products }) {
-    const initialProductData = {
+    const [productData, setProductData] = useState({
         productId: '',
-        cant: 0,
-        price: 0,
+        cant: '',
+        price: '',
         subtotal: 0,
-        shippingPrice: 0,
+        shippingPrice: '',
         total: 0
-    };
-    
-    const [productData, setProductData] = useState(initialProductData);
+    });
 
     useEffect(() => {
         const { cant, price, shippingPrice } = productData;
@@ -21,16 +19,12 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             subtotal,
             total
         }));
-    }, [productData.cant, productData.price, productData.shippingPrice]);
+    }, [productData.cant, productData.price, productData.shippingPrice, productData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const updatedValue = value ? Number(value) : 0;
-        setProductData(prevData => ({
-            ...prevData,
-            [name]: updatedValue
-        }));
-        onChangeData(e);
+        setProductData(prevData => ({ ...prevData, [name]: value }));
+        onChangeData(e);  // Sincroniza con los datos de formulario
     };
 
     const handleSubmit = (e) => {
@@ -43,16 +37,10 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             return;
         }
 
-        const validQuoteData = {
+        onSubmit({
             ...quoteData,
-            cant: productData.cant,
-            price: productData.price,
-            shippingPrice: productData.shippingPrice,
-            subtotal: productData.subtotal,
-            total: productData.total
-        };
-
-        onSubmit(validQuoteData);
+            ...productData
+        });
     };
 
     return (
@@ -60,7 +48,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="m-2 flex-grow-1">
                 <select
                     name="clientId"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                     onChange={onChangeData}
                     value={quoteData.clientId}
                 >
@@ -76,7 +64,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="m-2 flex-grow-1">
                 <select
                     name="productId"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                     onChange={handleChange}
                     value={productData.productId}
                 >
@@ -92,9 +80,9 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="m-2 flex-grow-1">
                 <input 
                     type="number" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
-                    placeholder="Cantidad" 
                     name="cant" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md" 
+                    placeholder="Cantidad" 
                     value={productData.cant} 
                     onChange={handleChange} 
                 />
@@ -103,9 +91,9 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="m-2 flex-grow-1">
                 <input 
                     type="number" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
-                    placeholder="Precio por Unidad" 
                     name="price" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md" 
+                    placeholder="Precio por Unidad" 
                     value={productData.price} 
                     onChange={handleChange} 
                 />
@@ -114,9 +102,9 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="w-full lg:w-1/3 p-2">
                 <input 
                     type="number" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
-                    placeholder="Precio de Envío" 
                     name="shippingPrice" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md" 
+                    placeholder="Precio de Envío" 
                     value={productData.shippingPrice} 
                     onChange={handleChange} 
                 />
@@ -125,7 +113,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="m-2 flex-grow-1">
                 <textarea
                     name="description"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                     placeholder="Descripción"
                     value={quoteData.description}
                     onChange={onChangeData}
@@ -133,30 +121,37 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             </div>
 
             <div className="w-full lg:w-1/2 p-2">
-                <label className="block mb-2">Subtotal</label>
+                <label>Subtotal</label>
                 <input 
                     type="number" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-200" 
                     value={productData.subtotal} 
                     readOnly 
                 />
             </div>
 
             <div className="w-full lg:w-1/2 p-2">
-                <label className="block mb-2">Total</label>
+                <label>Total</label>
                 <input 
                     type="number" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-200" 
                     value={productData.total} 
                     readOnly 
                 />
             </div>
 
             <div className="m-2 flex-grow-1">
-                <button className="mx-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md shadow-md transition duration-300" type="submit">
+                <button
+                    type="submit"
+                    className="px-6 py-2 bg-blue-500 text-white rounded-md"
+                >
                     {isCreating ? 'Crear Cotización' : 'Actualizar Cotización'}
                 </button>
-                <button className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md shadow-md transition duration-300" type="button" onClick={onClear}>
+                <button
+                    type="button"
+                    className="ml-4 px-6 py-2 bg-gray-500 text-white rounded-md"
+                    onClick={onClear}
+                >
                     Limpiar
                 </button>
             </div>

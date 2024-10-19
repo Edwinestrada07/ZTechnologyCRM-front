@@ -3,23 +3,19 @@ import FormQuote from '../components/formQuote';
 import TableQuote from '../components/tableQuote';
 
 const QuotePage = () => {
-    const [data, setData] = useState({
-        clients: [],
-        products: [],
-        quotes: [],
-    });
+    const [data, setData] = useState({ clients: [], products: [], quotes: [] });
     const [formState, setFormState] = useState({
         selectedClient: '',
         selectedProduct: '',
         isEdit: false,
         quoteData: {
             product: '',
-            cant: '',
-            price: '',
+            cant: 0,
+            price: 0,
             description: '',
-            subtotal: '',
-            shippingPrice: '',
-            total: ''
+            subtotal: 0,
+            shippingPrice: 0,
+            total: 0
         }
     });
     const [quoteCreated, setQuoteCreated] = useState(false);
@@ -27,15 +23,9 @@ const QuotePage = () => {
     const fetchData = async () => {
         try {
             const [clientsData, productsData, quotesData] = await Promise.all([
-                fetch('http://localhost:4000/client', {
-                    headers: { authorization: localStorage.getItem('token') }
-                }).then(res => res.json()),
-                fetch('http://localhost:4000/product', {
-                    headers: { authorization: localStorage.getItem('token') }
-                }).then(res => res.json()),
-                fetch('http://localhost:4000/quote', {
-                    headers: { authorization: localStorage.getItem('token') }
-                }).then(res => res.json()),
+                fetch('http://localhost:4000/client', { headers: { authorization: localStorage.getItem('token') } }).then(res => res.json()),
+                fetch('http://localhost:4000/product', { headers: { authorization: localStorage.getItem('token') } }).then(res => res.json()),
+                fetch('http://localhost:4000/quote', { headers: { authorization: localStorage.getItem('token') } }).then(res => res.json()),
             ]);
             setData({ clients: clientsData, products: productsData, quotes: quotesData });
         } catch (error) {
@@ -43,13 +33,11 @@ const QuotePage = () => {
         }
     };
 
-    useEffect(() => {
-        fetchData();
-    }, [quoteCreated]);
+    useEffect(() => { fetchData(); }, [quoteCreated]);
 
-    const handleSubmit = async () => {
-        const url = formState.isEdit ? `http://localhost:4000/quote/${formState.quoteData.id}` : 'http://localhost:4000/quote';
+    const handleSubmit = async (quoteData) => {
         const method = formState.isEdit ? 'PUT' : 'POST';
+        const url = formState.isEdit ? `http://localhost:4000/quote/${quoteData.id}` : 'http://localhost:4000/quote';
         try {
             const response = await fetch(url, {
                 method,
@@ -60,14 +48,10 @@ const QuotePage = () => {
                 body: JSON.stringify({
                     clientId: formState.selectedClient,
                     productId: formState.selectedProduct,
-                    ...formState.quoteData
+                    ...quoteData
                 })
             });
-            if (response.ok) {
-                setQuoteCreated(!quoteCreated);
-            } else {
-                console.error('No se pudo procesar la cotización');
-            }
+            if (response.ok) setQuoteCreated(prev => !prev);
         } catch (error) {
             console.error('Error al procesar cotización:', error);
         }
@@ -79,11 +63,7 @@ const QuotePage = () => {
                 method: 'DELETE',
                 headers: { authorization: localStorage.getItem('token') }
             });
-            if (response.ok) {
-                setQuoteCreated(!quoteCreated);
-            } else {
-                console.error('No se pudo eliminar la cotización');
-            }
+            if (response.ok) setQuoteCreated(prev => !prev);
         } catch (error) {
             console.error('Error al eliminar cotización:', error);
         }
@@ -91,17 +71,11 @@ const QuotePage = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        if (name === 'clientId' || name === 'productId') {
-            setFormState(prev => ({
-                ...prev,
-                [name === 'clientId' ? 'selectedClient' : 'selectedProduct']: value
-            }));
-        } else {
-            setFormState(prev => ({
-                ...prev,
-                quoteData: { ...prev.quoteData, [name]: value }
-            }));
-        }
+        setFormState(prev => ({
+            ...prev,
+            [name.includes('client') ? 'selectedClient' : 'selectedProduct']: value,
+            quoteData: { ...prev.quoteData, [name]: value }
+        }));
     };
 
     return (
@@ -118,10 +92,11 @@ const QuotePage = () => {
                     isCreating={!formState.isEdit}
                     quoteData={formState.quoteData}
                     clients={data.clients}
-                    products={data.products}
+                    products={data.products} // Asegúrate de que 'products' se pase aquí
                 />
                 <TableQuote
                     clients={data.clients}
+                    products={data.products} // Asegúrate de pasar 'products' aquí
                     quoteList={data.quotes}
                     deleteQuote={handleDelete}
                     updateQuote={quoteId => setFormState({
