@@ -48,7 +48,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="m-2 flex-grow-1">
                 <select
                     name="clientId"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     onChange={onChangeData}
                     value={quoteData.clientId}
                 >
@@ -64,7 +64,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="m-2 flex-grow-1">
                 <select
                     name="productId"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     onChange={handleChange}
                     value={productData.productId}
                 >
@@ -81,9 +81,9 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                 <input 
                     type="number" 
                     name="cant" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
                     placeholder="Cantidad" 
-                    value={productData.cant} 
+                    value={productData.cant || ''} 
                     onChange={handleChange} 
                 />
             </div>
@@ -92,9 +92,9 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                 <input 
                     type="number" 
                     name="price" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
                     placeholder="Precio por Unidad" 
-                    value={productData.price} 
+                    value={productData.price || ''} 
                     onChange={handleChange} 
                 />
             </div>
@@ -103,9 +103,9 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                 <input 
                     type="number" 
                     name="shippingPrice" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
                     placeholder="Precio de Envío" 
-                    value={productData.shippingPrice} 
+                    value={productData.shippingPrice || ''} 
                     onChange={handleChange} 
                 />
             </div>
@@ -113,9 +113,9 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
             <div className="m-2 flex-grow-1">
                 <textarea
                     name="description"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     placeholder="Descripción"
-                    value={quoteData.description}
+                    value={quoteData.description || ''}
                     onChange={onChangeData}
                 />
             </div>
@@ -125,7 +125,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                 <input 
                     type="number" 
                     className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-200" 
-                    value={productData.subtotal} 
+                    value={productData.subtotal || ''} 
                     readOnly 
                 />
             </div>
@@ -135,7 +135,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                 <input 
                     type="number" 
                     className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-200" 
-                    value={productData.total} 
+                    value={productData.total || ''} 
                     readOnly 
                 />
             </div>

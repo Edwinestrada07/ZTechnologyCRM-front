@@ -11,7 +11,7 @@ const CTA = () => {
                 <img
                     src={bgPattern}
                     layout="fill" // Ajusta la imagen para que ocupe toda la sección
-                    objectFit="cover" // Hace que la imagen cubra el área
+                    objectfit="cover" // Hace que la imagen cubra el área
                     className="pointer-events-none" // Evita que la imagen interfiera con la interacción
                     alt="Background pattern"
                 />

@@ -18,23 +18,33 @@ const TableQuote = ({ clients, products, quoteList, deleteQuote, updateQuote }) 
 
     const handlePrintPDF = () => {
         const doc = new jsPDF();
+    
         doc.text("Cotización Detallada", 10, 10);
+    
         if (selectedQuote) {
             const product = products.find(product => product.id === selectedQuote.productId);
-            doc.text(`Producto: ${product ? product.title : 'No especificado'}`, 10, 20);
-            // Agrega más detalles de la cotización según sea necesario
+    
+            // Datos de la tabla
+            const tableData = [
+                ["Producto", product ? product.title : 'No especificado'],
+                ["Cantidad", selectedQuote.cant],
+                ["Precio por Unidad", `$${selectedQuote.price}`],
+                ["Descripción", selectedQuote.description || 'No especificada'],
+                ["Subtotal", `$${selectedQuote.subtotal}`],
+                ["Precio de Envío", `$${selectedQuote.shippingPrice}`],
+                ["Total", `$${selectedQuote.total}`]
+            ];
+    
+            // Crear una tabla en el PDF
+            let startY = 30; // Posición inicial en el eje Y
+            tableData.forEach(([label, value], index) => {
+                doc.text(`${label}:`, 10, startY + (index * 10));
+                doc.text(`${value}`, 80, startY + (index * 10)); // Valor en la columna derecha
+            });
         }
+    
         doc.save(`cotizacion_${selectedQuote.id}.pdf`);
-    };
-
-    const handleDownloadFile = () => {
-        const element = document.createElement("a");
-        const file = new Blob([JSON.stringify(selectedQuote)], { type: 'text/plain' });
-        element.href = URL.createObjectURL(file);
-        element.download = `cotizacion_${selectedQuote.id}.txt`; // Cambia a .csv si es necesario
-        document.body.appendChild(element);
-        element.click();
-    };
+    };    
 
     return (
         <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
@@ -87,42 +97,43 @@ const TableQuote = ({ clients, products, quoteList, deleteQuote, updateQuote }) 
                 isOpen={modalIsOpen} 
                 onRequestClose={closeModal} 
                 contentLabel="Cotización Detallada" 
-                className="p-6 bg-white shadow-lg rounded-lg max-w-2xl mx-auto mt-20"
+                className="p-3 bg-white shadow-xl rounded-xl max-w-3xl mx-auto mt-20"
             >
-                <h2 className="text-2xl font-bold mb-4">Cotización Detallada</h2>
+                <h2 className="text-3xl font-bold mb-3 text-gray-700">Cotización Detallada</h2>
+
                 {selectedQuote && (
-                    <div className="bg-gray-100 text-gray-600 font-medium border-b">
-                        <div className="card-body">
-                            {['cant', 'price', 'description', 'subtotal', 'shippingPrice', 'total'].map(field => (
-                                <p key={field} className="py-1 px-2">{`${field}: ${selectedQuote[field]}`}</p>
+                    <div className="bg-gray-300 border rounded-lg shadow-inner p-4 mb-4">
+                        <p className="text-xl font-semibold text-gray-800 mb-4">
+                            Producto: {products && Array.isArray(products) ? 
+                                products.find(product => product.id === selectedQuote.productId)?.title || 'No especificado' : 
+                            'No especificado'}
+                        </p>
+
+                        <div className="grid grid-cols-2 gap-2">
+                            {['Cantidad', 'Precio por Unidad', 'Descripción', 'Subtotal', 'Precio de Envío', 'Total'].map((label, index) => (
+                                <div key={index} className="bg-white p-3 border rounded-xl">
+                                    <p className="text-sm text-gray-500">{label}</p>
+                                    <p className="text-lg font-medium text-gray-800">{selectedQuote[Object.keys(selectedQuote)[index + 1]] || 'No especificado'}</p>
+                                </div>
                             ))}
-                            {/* Mostrar el nombre del producto */}
-                            <p className="py-1 px-2">
-                                Producto: {products && Array.isArray(products) ? 
-                                    products.find(product => product.id === selectedQuote.productId)?.title || 'No especificado' : 
-                                    'No especificado'}
-                            </p>
                         </div>
                     </div>
                 )}
-                <button 
-                    className="mt-4 py-2 px-4 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg" 
-                    onClick={closeModal}
-                >
-                    Cerrar
-                </button>
-                <button 
-                    className="mt-2 ml-2 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg" 
-                    onClick={handlePrintPDF}
-                >
-                    Imprimir PDF
-                </button>
-                <button 
-                    className="mt-2 ml-2 py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-lg" 
-                    onClick={handleDownloadFile}
-                >
-                    Descargar Archivo
-                </button>
+
+                <div className="flex justify-end space-x-4">
+                    <button 
+                        className="py-2 px-6 bg-gray-300 hover:bg-gray-400 text-gray-700 rounded-lg shadow-md transition duration-300" 
+                        onClick={closeModal}
+                    >
+                        Cerrar
+                    </button>
+                    <button 
+                        className="py-2 px-6 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md transition duration-300" 
+                        onClick={handlePrintPDF}
+                    >
+                        Imprimir PDF
+                    </button>
+                </div>
             </Modal>
         </div>
     );

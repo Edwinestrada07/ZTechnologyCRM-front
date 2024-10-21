@@ -58,7 +58,7 @@ const Profile = () => {
                             <h3 className="text-center mb-4">Cambiar Contraseña</h3>
                             <div className="form-group">
                                 <input
-                                    className="form-control"
+                                    className="w-full px-4 text-gray-500 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                     placeholder='Contraseña Actual'
                                     type="password" 
                                     value={password} 
@@ -67,7 +67,7 @@ const Profile = () => {
                             </div>
                             <div className="form-group">
                                 <input
-                                    className="form-control"
+                                    className="w-full px-4 text-gray-500  py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                     placeholder='Nueva contraseña'
                                     type="password"  
                                     value={newPassword} 
@@ -76,7 +76,7 @@ const Profile = () => {
                             </div>
                             <div className="form-group">
                                 <input
-                                    className="form-control"
+                                    className="w-full px-4 text-gray-500  py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                     placeholder='Confirmar nueva contraseña'
                                     type="password"  
                                     value={confirmNewPassword} 
