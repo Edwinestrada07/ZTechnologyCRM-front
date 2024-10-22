@@ -1,6 +1,6 @@
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 function Navbar() {
@@ -8,6 +8,7 @@ function Navbar() {
     const [state, setState] = useState(false); // Para manejar el menú responsivo
     const [loggedIn, setLoggedIn] = useState(false); // Estado para verificar autenticación
     const [showDashboard, setShowDashboard] = useState(false); // Controla el desplegado del Dashboard
+    const dashboardRef = useRef(null);
 
     useEffect(() => {
         // Verificar si el token está presente
@@ -15,7 +16,18 @@ function Navbar() {
         if (token) {
             setLoggedIn(true);
         }
-    }, []);
+
+        const handleClickOutside = (event) => {
+            if (dashboardRef.current && !dashboardRef.current.contains(event.target)) {
+                setShowDashboard(false); // Cierra el submenú si el clic fue fuera del mismo
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [dashboardRef]);
 
     const navigation = [
         { title: "Inicio", path: "/" },
@@ -38,7 +50,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="bg-gray-800 w-full border-b md:border-0 md:static">
+        <nav className="bg-gray-800 w-full border-b md:border-0 sticky top-0 z-50">
             <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
                     <a href="/">
@@ -75,13 +87,13 @@ function Navbar() {
 
                         {/* Dashboard Option */}
                         {loggedIn && (
-                            <li className="text-gray-200 text-lg">
+                            <li className="relative text-gray-200 text-lg">
                                 <button onClick={() => setShowDashboard(!showDashboard)}>
                                     Dashboard
                                 </button>
                                 {/* Sub-navbar for Dashboard Items */}
                                 {showDashboard && (
-                                    <ul className="absolute mt-2 p-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black">
+                                    <ul ref={dashboardRef} className="absolute mt-2 p-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black">
                                         {dashboardItems.map((item, idx) => (
                                             <li key={idx} className="text-gray-400">
                                                 <NavLink to={item.path}>
