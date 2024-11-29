@@ -71,7 +71,7 @@ const Testimonial = () => {
                 >
                     {/* Duplicamos los items del Marquee para que se repitan */}
                     {[0, 1].map((index) => (
-                        <div className="flex flex-1 gap-2" key={index}>
+                        <div className="flex flex-1 h-64 gap-2" key={index}>
                             {marqueeItems.map((item, idx) => (
                                 <div className="flex-1" key={idx}>
                                     <div className="h-full max-w-xs rounded-xl bg-gray-200 dark:bg-gray-800 p-3 shadow-md">
