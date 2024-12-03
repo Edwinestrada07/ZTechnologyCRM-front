@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# ZTechnologyCRM (StartUp - OARA) - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Optimiza tu gestión de inventario y relaciones con clientes.
+La aplicación está diseñada para facilitar la operación diaria de un negocio, ayudando a los dueños o administradores a gestionar productos y clientes de manera eficiente.
 
-## Available Scripts
+## Características
 
-In the project directory, you can run:
+- Autenticación de usuarios.
+- Optimización de reportes: Mejora el control sobre tu inventario mientras ofreces una experiencia de cliente más personalizada.
+- Elimina cargas innecesarias: Automatiza tareas repetitivas y reduce la carga administrativa maximizando la productividad.
+- Posee y controla tus datos: La seguridad de tus datos es nuestra prioridad, brindándote total control sobre ellos.
+- Analiza Clientes Potenciales: Te ayudamos a identificar y comprender mejor a los clientes potenciales.
 
-### `npm start`
+## Explora las funciones que ofrecemos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Gestión de usuarios
+- Gestión de productos
+- Gestión de clientes
+- Seguimiento de ventas
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tecnologías utilizadas
 
-### `npm test`
+- **React**: Biblioteca para la creación de interfaces de usuario.
+- **Tailwind CSS**: Framework CSS para el diseño responsivo y personalización de estilos.
+- **Supabase**: Autenticación con OAuth para iniciar sesión con Google.
+- **Fetch API**: Para las llamadas al backend.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Scripts Disponibles
 
-### `npm run build`
+![Interfaz de ZTechnologyCRM](./public/assets/screen/img1.jpg)
+## Vista para la autenticación de usuarios
+![Interfaz de ZTechnologyCRM](./public/assets/screen/img2.jpg)
+## Vista para la funcionalidad de la web
+![Interfaz de ZTechnologyCRM](./public/assets/screen/img3.jpg)
+![Interfaz de ZTechnologyCRM](./public/assets/screen/img4.jpg)
+## Vista para los testimonios
+![Interfaz de ZTechnologyCRM](./public/assets/screen/img5.jpg)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contribuciones
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Las contribuciones son bienvenidas.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Visitar sitio web 
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://ztechnology-oara.netlify.app/
