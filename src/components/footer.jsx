@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaGithub, FaLinkedin, FaPortrait } from "react-icons/fa"
 
 const Footer = () => {
 
@@ -10,13 +11,17 @@ const Footer = () => {
 
     const socialInfo = [
         {
-            icon: <i className="fab fa-github"></i>,
+            icon: <FaLinkedin className="w-8 h-8" />,
+            href: "https://www.linkedin.com/in/edwinestradam/"
+        },
+        {
+            icon: <FaGithub className="w-8 h-8" />,
             href: "https://github.com/Edwinestrada07"
         },
         {
-            icon: <i className="fab fa-linkedin"></i>,
-            href: "https://www.linkedin.com/in/edwinestradam/"
-        },
+            icon: <FaPortrait className="w-8 h-8" />,
+            href: "https://portafolioedwinestrada.netlify.app/"
+        }
     ]
 
     return (
