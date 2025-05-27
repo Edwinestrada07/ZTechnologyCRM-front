@@ -51,41 +51,43 @@ const Profile = () => {
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <div className="text-white p-5">
-                        <h2 className="text-center font-weight-normal mb-4">Página de Acceso</h2>
+                        <h2 className="text-gray-800 text-center text-3xl my-3 font-extrabold sm:text-4xl">Página de Acceso</h2>
+                        <p className="text-gray-600 my-2 text-center">
+                            A continuación el formulario para el cambio de contraseña.
+                        </p>
                         {error && <div className="alert alert-danger">{error}</div>}
 
-                        <form onSubmit={handlePasswordChange}>
-                            <h3 className="text-center mb-4">Cambiar Contraseña</h3>
-                            <div className="form-group">
+                        <form onSubmit={handlePasswordChange} className="text-gray-600 d-flex flex-wrap align-items-center">
+                            <div className="m-2 flex-grow-1">
                                 <input
-                                    className="w-full px-4 text-gray-500 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                     placeholder='Contraseña Actual'
                                     type="password" 
                                     value={password} 
                                     onChange={e => setPassword(e.target.value)} 
                                 />
                             </div>
-                            <div className="form-group">
+                            <div className="m-2 flex-grow-1">
                                 <input
-                                    className="w-full px-4 text-gray-500  py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                    placeholder='Nueva contraseña'
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                    placeholder='Nueva Contraseña'
                                     type="password"  
                                     value={newPassword} 
                                     onChange={e => setNewPassword(e.target.value)} 
                                 />
                             </div>
-                            <div className="form-group">
+                            <div className="m-2 flex-grow-1">
                                 <input
-                                    className="w-full px-4 text-gray-500  py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                                    placeholder='Confirmar nueva contraseña'
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                    placeholder='Confirmar Contraseña'
                                     type="password"  
                                     value={confirmNewPassword} 
                                     onChange={e => setConfirmNewPassword(e.target.value)} 
                                 />
                             </div>
-                            <div className="form-group text-center">
+                            <div className="m-2 form-group text-center">
                                 <button 
-                                    className="btn btn-primary" 
+                                    className="mx-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md shadow-md transition duration-300"  
                                     onClick={handlePasswordChange}
                                     type="submit"
                                 >

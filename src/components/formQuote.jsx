@@ -114,13 +114,14 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                 <textarea
                     name="description"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    rows={3}
                     placeholder="Descripción"
                     value={quoteData.description || ''}
                     onChange={onChangeData}
                 />
             </div>
 
-            <div className="w-full lg:w-1/2 p-2">
+            <div>
                 <label>Subtotal</label>
                 <input 
                     type="number" 
@@ -128,9 +129,7 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                     value={productData.subtotal || ''} 
                     readOnly 
                 />
-            </div>
 
-            <div className="w-full lg:w-1/2 p-2">
                 <label>Total</label>
                 <input 
                     type="number" 
@@ -140,16 +139,16 @@ function FormQuote({ onSubmit, onChangeData, onClear, isCreating, quoteData, cli
                 />
             </div>
 
-            <div className="m-2 flex-grow-1">
+            <div className="m-2 flex-grow-1 justify-center text-center">
                 <button
                     type="submit"
-                    className="px-6 py-2 bg-blue-500 text-white rounded-md"
+                    className="mx-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md shadow-md transition duration-300"
                 >
                     {isCreating ? 'Crear Cotización' : 'Actualizar Cotización'}
                 </button>
                 <button
                     type="button"
-                    className="ml-4 px-6 py-2 bg-gray-500 text-white rounded-md"
+                    className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md shadow-md transition duration-300"
                     onClick={onClear}
                 >
                     Limpiar
